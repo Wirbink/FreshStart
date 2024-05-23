@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'services_details_model.g.dart';
+part 'services_detail_model.g.dart';
 
 @JsonSerializable()
 class ServicesDatailsModel{

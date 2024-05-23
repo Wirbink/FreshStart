@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'amount_cash_express_model.g.dart';
 
 @JsonSerializable()
-class amountcash{
+class AmountCashExpressModel{
 String pay;
 String account;
 int  clabeDestination;
@@ -13,8 +13,7 @@ String withdrawalKey;
 int securityCode;
 int amount;
 
-
-amountcash({
+AmountCashExpressModel({
 
   required this.pay,
   required this.account, 
@@ -26,7 +25,7 @@ amountcash({
   required this.amount
 });
 
-factory amountcash.amountJson(Map<String,dynamic>json) => _$AmountcashAmountJson(Json);
-Map<String, dynamic> toJson() => _$AmountCashToJson(This);
+  factory AmountCashExpressModel.amountJson(Map<String,dynamic>json) => _$AmountCashExpressModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AmountCashExpressModelToJson(this);
 
 }

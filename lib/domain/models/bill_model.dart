@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'form_model.g.dart';
+part 'bill_model.g.dart';
 
 @JsonSerializable()
 class BillModel {
@@ -14,7 +14,7 @@ class BillModel {
     required this.youPaidWith
   });
 
-  factory BillModel.fromJson(Map<String, dynamic> json) => _$BillModel(json);
+  factory BillModel.fromJson(Map<String, dynamic> json) => _$BillModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BillModel(this);
+  Map<String, dynamic> toJson() => _$BillModelToJson(this);
 }

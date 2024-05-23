@@ -1,10 +1,13 @@
-import 'dart:ffi';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'send_money_model.g.dart';
+
+@JsonSerializable()
 class SendMoneyModel{
   String nameCard;
   String adresseeName;
-  Int clabe;
-  Double amount;
+  int clabe;
+  double amount;
 
   SendMoneyModel({
     required this.nameCard,
@@ -12,4 +15,8 @@ class SendMoneyModel{
     required this.clabe,
     required this.amount,
   });
+
+  factory SendMoneyModel.fromJson(Map<String, dynamic> json) => _$SendMoneyModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SendMoneyModelToJson(this);
 }

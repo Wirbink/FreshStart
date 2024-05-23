@@ -1,0 +1,18 @@
+{
+    "rechargesId": 1,
+    "chooseList": {
+        "nameCard": "Recarga"
+    },
+    "phoneNumber": {
+        "phonenumberdata": 9982642802
+    },
+    "payWith": {
+        "paywithdata": "FreshStart"
+    },
+    "rechargeType": {
+        "rechargetypedata": "Tiempo Aire"
+    },
+    "sentAmount": {
+        "amountdata": 50
+    }
+}

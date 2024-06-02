@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fresh_start/core/presentation/views/estado_cuenta_view.dart';
 import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
 import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
 import 'package:fresh_start/styles.dart';

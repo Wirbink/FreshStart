@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/views/home.dart';
 import 'package:fresh_start/core/presentation/widgets/general_button.dart';
-import 'package:fresh_start/core/presentation/widgets/general_button.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:local_auth/local_auth.dart';
 

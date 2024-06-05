@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'send_money_model.g.dart';
 
 @JsonSerializable()
-class SendMoneyModel{
+class SendMoneyModel {
   String nameCard;
   String adresseeName;
   int clabe;
@@ -16,7 +16,8 @@ class SendMoneyModel{
     required this.amount,
   });
 
-  factory SendMoneyModel.fromJson(Map<String, dynamic> json) => _$SendMoneyModelFromJson(json);
+  factory SendMoneyModel.fromJson(Map<String, dynamic> json) =>
+      _$SendMoneyModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$SendMoneyModelToJson(this);
 }

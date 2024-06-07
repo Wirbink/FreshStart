@@ -1,10 +1,10 @@
 import 'package:fresh_start/domain/models/account_status_model.dart';
 import 'package:fresh_start/domain/repositories/account_status_repository.dart';
 
-class load_account_status{
+class LoadAccountStatusData{
   final AccountStatusRepository repository;
 
-  load_account_status(this.repository);
+  LoadAccountStatusData(this.repository);
 
   Future<AccountStatusModel> call() async {
     final account_status_repository_impl = await repository.loadAccountStatusData();

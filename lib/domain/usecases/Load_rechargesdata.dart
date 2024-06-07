@@ -1,10 +1,10 @@
 import 'package:fresh_start/domain/repositories/recharge_repository.dart';
 import 'package:fresh_start/domain/models/Recharges/rechargesdata.dart';
 
-class Load_rechargesdata {
+class LoadRechargesData {
   final RechargeRepository repository;
 
-  Load_rechargesdata(this.repository);
+  LoadRechargesData(this.repository);
 
   Future<RechargeModel> call() async {
     final form_repository_impl = await repository.loadFormData();

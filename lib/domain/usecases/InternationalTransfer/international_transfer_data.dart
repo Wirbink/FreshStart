@@ -7,8 +7,10 @@ class InternationalTransferData {
   InternationalTransferData(this.repository);
 
   Future<InternationalTransferModel> call() async {
+
     final internationalTransferData =
         await repository.loadInternationalTransfer();
+        
     final clabeRegex = RegExp(r'^[0-9]{18}$');
     final charactersLimitRegex = RegExp(r'^[a-zA-Z]{0,50}$');
     final currencyFormatRegex = RegExp(r'^[A-Z]{3}$');

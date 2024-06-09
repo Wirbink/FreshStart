@@ -1,14 +1,14 @@
-import 'package:equatable/equatable.dart';
+// import 'package:equatable/equatable.dart';
 
-abstract class LoginEvent extends Equatable {
-  const LoginEvent();
+// abstract class LoginEvent extends Equatable {
+//   const LoginEvent();
 
-  @override
-  List<Object?> get props => [];
-}
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class LoadLoginDataEvent extends LoginEvent {}
+// class LoadLoginDataEvent extends LoginEvent {}
 
-class EmailChanged extends LoginEvent {
-  final
-}
+// class EmailChanged extends LoginEvent {
+//   final
+// }

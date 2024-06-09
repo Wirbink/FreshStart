@@ -9,11 +9,11 @@ class BankDeatilModel {
   String accountNumber;
   String bankName;
   
-  BankDeatilModel({
-    required this.name,
-    required this.lastName,
-    required this.accountNumber,
-    required this.bankName
+   BankDeatilModel({
+    this.name = 'Default Name',
+    this.lastName = 'Default Last Name',
+    this.accountNumber = '0000000000',
+    this.bankName = 'Default Bank',
   });
 
   factory BankDeatilModel.fromJson(Map<String, dynamic> json) => _$BankDeatilModelFromJson(json);

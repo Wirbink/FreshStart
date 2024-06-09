@@ -8,8 +8,8 @@ class AmountModel {
   double value;
 
   AmountModel({
-    required this.currency,
-    required this.value
+    this.currency = 'USD',
+    this.value = 0.0,
   });
 
   factory AmountModel.fromJson(Map<String, dynamic> json) => _$AmountModelFromJson(json);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/views/home.dart';
+import 'package:fresh_start/core/presentation/views/register_view.dart';
 import 'package:fresh_start/core/presentation/widgets/general_button.dart';
 import 'package:fresh_start/core/presentation/widgets/input_text.dart';
 import 'package:fresh_start/styles.dart';
@@ -105,7 +106,12 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             const SizedBox(height: 35.0),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => RegisterView()));
+                              },
                               child: const GeneralButtonWidget(
                                   text: 'Registrarse'),
                             ),

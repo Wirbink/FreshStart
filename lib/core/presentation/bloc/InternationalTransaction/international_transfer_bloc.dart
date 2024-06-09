@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fresh_start/core/presentation/blocs/InternationalTransaction/internantional_transfer_state.dart';
-import 'package:fresh_start/core/presentation/blocs/InternationalTransaction/international_transfer_event.dart';
+import 'package:fresh_start/core/presentation/bloc/InternationalTransaction/internantional_transfer_state.dart';
+import 'package:fresh_start/core/presentation/bloc/InternationalTransaction/international_transfer_event.dart';
 import 'package:fresh_start/domain/usecases/InternationalTransfer/international_transfer_data.dart' as usecase;
 
 

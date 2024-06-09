@@ -99,8 +99,13 @@ class _RegisterViewState extends State<RegisterView> {
                           color: colorBorder,
                         )),
                     const SizedBox(height: 24.0),
-                    Text("TÉRMINOS Y CONDICIONES", style: TextStyle(fontFamily: 'MarkPro', fontWeight: FontWeight.bold, fontSize: 20.0),)
-                    ,
+                    const Text(
+                      "TÉRMINOS Y CONDICIONES",
+                      style: TextStyle(
+                          fontFamily: 'MarkPro',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0),
+                    ),
                     Row(
                       children: [
                         Checkbox(
@@ -115,7 +120,8 @@ class _RegisterViewState extends State<RegisterView> {
                           "Acepto los términos y condiciones",
                           style: TextStyle(
                               fontFamily: 'MarkPro',
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w600, 
+                              fontSize: 12),
                         ),
                       ],
                     ),
@@ -130,7 +136,8 @@ class _RegisterViewState extends State<RegisterView> {
                     const SizedBox(height: 8.0),
                     Center(
                       child: GestureDetector(
-                        child: const GeneralButtonWidget(text: "Iniciar Sesión"),
+                        child:
+                            const GeneralButtonWidget(text: "Iniciar Sesión"),
                       ),
                     ),
                   ],

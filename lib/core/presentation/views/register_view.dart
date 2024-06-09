@@ -13,6 +13,8 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+  bool _acceptedTerms = false;
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -96,6 +98,27 @@ class _RegisterViewState extends State<RegisterView> {
                           Icons.pin,
                           color: colorBorder,
                         )),
+                    const SizedBox(height: 24.0),
+                    Text("TÉRMINOS Y CONDICIONES", style: TextStyle(fontFamily: 'MarkPro', fontWeight: FontWeight.bold, fontSize: 20.0),)
+                    ,
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _acceptedTerms,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _acceptedTerms = value ?? false;
+                            });
+                          },
+                        ),
+                        const Text(
+                          "Acepto los términos y condiciones",
+                          style: TextStyle(
+                              fontFamily: 'MarkPro',
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: 24.0),
                     Center(
                       child: GestureDetector(

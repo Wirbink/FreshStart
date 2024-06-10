@@ -1,0 +1,12 @@
+{
+    "id": 1,
+    "name": "Brayn",
+    "lastName": "Sahagun",
+    "email": "braynupqroo@gmail.com",
+    "password": "1234",
+    "phoneNumber": "9983983716",
+    "brithDate": "2024-06-09T19:52:00",
+    "curp": "1234567890123456789",
+    "RFC": "1234567890123",
+    "country": "Mexico"
+}

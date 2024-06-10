@@ -1,0 +1,12 @@
+{
+    "id": 1,
+    "transactionDate": "2024-06-09T19:52:00",
+    "senderId": 1,
+    "receiverId": 2,
+    "amount": 500.00,
+    "concept": "Apoyo",
+    "type": "National",
+    "currency": null,
+    "exchangeRate": null,
+    "bankComission": null
+}

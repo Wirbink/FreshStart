@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "bankAccountId": 1,
+    "bankId": 1,
+    "cardNumber": "4444 4444 4444 44444",
+    "expirationDate": "05/27",
+    "cvv": "366",
+    "balance": 1500.00,
+    "cardName": "FreshStart",
+    "payNetProc": "MasterCard"
+}

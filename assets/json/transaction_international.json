@@ -1,0 +1,12 @@
+{
+    "id": 2,
+    "transactionDate": "2024-06-09T19:52:00",
+    "senderId": 1,
+    "receiverId": 2,
+    "amount": 500.00,
+    "concept": "Apoyo",
+    "type": "International",
+    "currency": "EUR",
+    "exchangeRate": 0.0055,
+    "bankComission": 50.0
+}

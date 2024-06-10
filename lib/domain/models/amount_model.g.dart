@@ -7,8 +7,8 @@ part of 'amount_model.dart';
 // **************************************************************************
 
 AmountModel _$AmountModelFromJson(Map<String, dynamic> json) => AmountModel(
-      currency: json['currency'] as String,
-      value: (json['value'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      value: (json['value'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$AmountModelToJson(AmountModel instance) =>

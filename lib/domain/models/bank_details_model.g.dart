@@ -8,10 +8,10 @@ part of 'bank_details_model.dart';
 
 BankDeatilModel _$BankDeatilModelFromJson(Map<String, dynamic> json) =>
     BankDeatilModel(
-      name: json['name'] as String,
-      lastName: json['lastName'] as String,
-      accountNumber: json['accountNumber'] as String,
-      bankName: json['bankName'] as String,
+      name: json['name'] as String? ?? 'Default Name',
+      lastName: json['lastName'] as String? ?? 'Default Last Name',
+      accountNumber: json['accountNumber'] as String? ?? '0000000000',
+      bankName: json['bankName'] as String? ?? 'Default Bank',
     );
 
 Map<String, dynamic> _$BankDeatilModelToJson(BankDeatilModel instance) =>

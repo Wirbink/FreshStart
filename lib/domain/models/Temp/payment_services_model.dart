@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+part 'payment_services_model.g.dart';
+
 @JsonSerializable()
 class PaymentServicesModel {
   int id;

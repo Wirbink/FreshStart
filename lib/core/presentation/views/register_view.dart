@@ -72,6 +72,13 @@ class _RegisterViewState extends State<RegisterView> {
                         )),
                     const SizedBox(height: 14.0),
                     const InputText(
+                        placeholder: "Contraseña",
+                        iconPlaceholder: Icon(
+                          Icons.visibility_off,
+                          color: colorBorder,
+                        )),
+                    const SizedBox(height: 14.0),
+                    const InputText(
                         placeholder: "Teléfono",
                         iconPlaceholder: Icon(
                           Icons.phone,

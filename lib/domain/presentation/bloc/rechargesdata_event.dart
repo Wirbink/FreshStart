@@ -6,8 +6,8 @@ abstract class RechargesdataEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
-
-class LoadRechargesDataEvent extends RechargesdataEvent {}
+//LoadRechargesDataEvent
+class Load_rechargesdataEvent extends RechargesdataEvent {}
 
 class phoneNumberChanged extends RechargesdataEvent {
   final int phoneNumber;
@@ -37,7 +37,7 @@ class RechargeTypeChanged extends RechargesdataEvent {
 }
 
 class SentAmountChanged extends RechargesdataEvent {
-  final String sentAmount;
+  final double sentAmount;
 
   const SentAmountChanged(this.sentAmount);
 

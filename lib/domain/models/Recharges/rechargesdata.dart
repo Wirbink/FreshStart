@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'rechargesdata.g.dart';
@@ -16,7 +18,7 @@ class RechargeModel {
     required this.sentAmount,
   });
 
-Factory RechargeModel.fromJson(Map<String, dynamic> json) => _$RechargeModel(json);
+Factory RechargeModel.fromJson(Map<String, dynamic> json) => _$RechargeModelFromJson(json);
 
 Map<String, dynamic> toJson() => _$RechargeModelFromJson(this);
 }

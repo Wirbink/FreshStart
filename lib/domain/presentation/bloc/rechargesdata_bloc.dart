@@ -4,8 +4,8 @@ import 'package:fresh_start/domain/presentation/bloc/rechargesdata_event.dart';
 import 'package:fresh_start/domain/presentation/bloc/rechargesdata_state.dart';
 class RechargesdataBloc extends Bloc<RechargesdataEvent, RechargesdataState> {
   final usecase.Load_rechargesdata loadFormData;
-
-  RechargesdataBloc(this.Load_rechargesdata) : super(const RechargesdataState()) {
+//Load_rechargesdata
+  RechargesdataBloc(this.loadFormData) : super(const RechargesdataState()) {
     on<Load_rechargesdataEvent>((event, emit) async {
       final rechargesData = await loadFormData();
       emit(RechargesdataState.fromModel(rechargesData));
@@ -31,9 +31,17 @@ class RechargesdataBloc extends Bloc<RechargesdataEvent, RechargesdataState> {
   }
 
   bool _validateForm() {
-    return state.phoneNumber.isNotEmpty &&
+    return state.phoneNumber.isEven &&
         state.payWith.isNotEmpty &&
         state.rechargeType.isNotEmpty &&
-        state.sentAmount.isNotEmpty;
+        state.sentAmount!.isFinite;
   }
 }
+
+// DIO modulo de flutter
+// introducion
+// trata
+// consiste
+// pros y contras
+// benecificios y limitaciones
+// argumentar por que es mejor el otro modulo o libreria

@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dark';
+
+import 'package:equatable/equatable.dart';
 
 abstract class AmountCashEvent extends Equatable {
   @override

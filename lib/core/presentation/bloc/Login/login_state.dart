@@ -18,6 +18,7 @@ class LoginState extends Equatable {
     String? email,
     String? password,
     bool? remember,
+    bool? isValid
   }) {
     return LoginState(
         email: email ?? this.email,

@@ -21,6 +21,7 @@ class InternationalTransferState extends Equatable {
     AmountModel? fee,
     this.concept,
   })  : sender = sender ?? BankDeatilModel(),
+  
         recipient = recipient ?? BankDeatilModel(),
         amount = amount ?? AmountModel(),
         exchangeRate = exchangeRate ?? 1.0,

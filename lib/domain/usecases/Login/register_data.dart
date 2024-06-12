@@ -1,11 +1,10 @@
-
 import 'package:fresh_start/domain/models/register_model.dart';
 import 'package:fresh_start/domain/repositories/rergister_repository.dart';
 
 class RegisterData {
   final RegisterRepository repository;
 
-  RegisterUser(this.repository);
+  RegisterData(this.repository);
 
   Future<RegisterModel> call() async {
     final registerData = await repository.loadRegister();

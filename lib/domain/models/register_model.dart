@@ -1,4 +1,3 @@
-import 'package:fresh_start/domain/models/login_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'register_model.g.dart';
@@ -26,8 +25,8 @@ class RegisterModel {
       required this.country,
       required this.acceptedTerms});
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) =>
+  factory RegisterModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterModelFromJson(json);
       
-  Map<String, dynamic> toJson() => _$LoginModelToJson(this);
+  Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
 }

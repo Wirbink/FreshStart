@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "name": "Brayn",
+    "lastname": "Sahagun",
+    "email": "brayn123@gmail.com",
+    "rfc": "1234567890123",
+    "phone": "9983983716",
+    "password": "123456",
+    "country": "Mexico",
+    "aceeptedTerms": true
+}

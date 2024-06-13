@@ -18,7 +18,7 @@ class RechargeModel {
     required this.sentAmount,
   });
 
-Factory RechargeModel.fromJson(Map<String, dynamic> json) => _$RechargeModelFromJson(json);
+factory RechargeModel.fromJson(Map<String, dynamic> json) => _$RechargeModelFromJson(json);
 
-Map<String, dynamic> toJson() => _$RechargeModelFromJson(this);
+Map<String, dynamic> toJson() => _$RechargeModelToJson(this);
 }

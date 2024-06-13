@@ -5,7 +5,7 @@ import 'package:fresh_start/domain/presentation/bloc/rechargesdata_state.dart';
 class RechargesdataBloc extends Bloc<RechargesdataEvent, RechargesdataState> {
   final usecase.Load_rechargesdata loadFormData;
 //Load_rechargesdata
-  RechargesdataBloc(this.loadFormData) : super(const RechargesdataState()) {
+  RechargesdataBloc(this.loadFormData) : super(const RechargesdataState() ) {
     on<Load_rechargesdataEvent>((event, emit) async {
       final rechargesData = await loadFormData();
       emit(RechargesdataState.fromModel(rechargesData));

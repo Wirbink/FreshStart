@@ -4,15 +4,16 @@ import 'package:json_annotation/json_annotation.dart';
 part 'rechargesimage.g.dart';
 @JsonSerializable()
 class RechargeImageModel {
-  Image imagen;
+  String Imagens;
 
   RechargeImageModel({
-    required this.imagen,
+    required this.Imagens,
     
   });
-  
-  Factory RechargeImageModel.fromJson(Map<String, dynamic> json) => _$RechargeImageModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RechargeImageModelFromJson(this);
+  
+  factory RechargeImageModel.fromJson(Map<String, dynamic> json) => _$RechargeImageModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RechargeImageModelToJson(this);
   
 }

@@ -1,5 +1,5 @@
-import 'package:fresh_start/data/repositories/login_repository.dart';
-import 'package:fresh_start/domain/models/login_model.dart';
+import 'package:fresh_start/domain/models/Auth/login_model.dart';
+import 'package:fresh_start/domain/repositories/Auth/login_repository.dart';
 
 class LoginData {
   final LoginRepository repository;
@@ -7,7 +7,7 @@ class LoginData {
   LoginData(this.repository);
 
   Future<LoginModel> call() async {
-    final loginData = await repository.loadLogin();
+    final loginData = await repository.loadLoginData();
     
     final emailRgx = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 

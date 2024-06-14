@@ -1,0 +1,12 @@
+{
+    "cardNumber": "4444 4444 4444 4444",
+    "balance": 32524.36,
+    "vencimiento": "05/27",
+    "cvv": "366",
+    "amount": 100.00,
+    "sender": "Brayn Sahagun",
+    "senderAccount": "123456789012345678",
+    "date": "2024-06-09T19:52:00",
+    "withdrawalKey": "5533 4387 2123",
+    "securityCode": "1512"
+}

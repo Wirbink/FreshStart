@@ -1,0 +1,11 @@
+{
+    "bankName": "FreshBank",
+    "senderName": "Brayn Sahagun",
+    "cardNumber": "4444 4444 4444 4444",
+    "amount": 200000.00,
+    "date": "2024-06-09T19:52:00",
+    "recipientName": "Irving Coyolt",
+    "cardNumberRecipient": "5555 5555 5555 5555",
+    "amountSend": 10000.00,
+    "concept": "Pago de estudios"
+}

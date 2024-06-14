@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fresh_start/core/presentation/bloc/Login/login_bloc.dart';
+import 'package:fresh_start/core/presentation/bloc/Login/login_event.dart';
+import 'package:fresh_start/core/presentation/bloc/Login/login_state.dart';
 import 'package:fresh_start/core/presentation/views/home.dart';
 import 'package:fresh_start/core/presentation/views/register_view.dart';
 import 'package:fresh_start/core/presentation/widgets/general_button.dart';
-import 'package:fresh_start/core/presentation/widgets/input_text.dart';
+import 'package:fresh_start/domain/repositories/login_repository_impl.dart';
+import 'package:fresh_start/domain/usecases/Login/login_data.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -45,92 +50,111 @@ class _LoginPageState extends State<LoginPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: screenHeight,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/LoginFreshBank.png'),
-                fit: BoxFit.cover),
-          ),
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(height: screenHeight * 0.3),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.1, vertical: 20.0),
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    color: colorPanel,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Correo',
-                          suffixIcon: Icon(Icons.email),
-                        ),
+    return BlocProvider(
+        create: (context) => LoginBloc(
+              LoginData(LoginRepositoryImpl()),
+            )..add(LoadLoginDataEvent()),
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Container(
+              height: screenHeight,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/LoginFreshBank.png'),
+                    fit: BoxFit.cover),
+              ),
+              child: Center(
+                child: Column(
+                  children: [
+                    SizedBox(height: screenHeight * 0.3),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.1, vertical: 20.0),
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: BoxDecoration(
+                        color: colorPanel,
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      const SizedBox(height: 20.0),
-                      const TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Contraseña',
-                          suffixIcon: Icon(Icons.visibility_off),
-                        ),
-                      ),
-                      const SizedBox(height: 30.0),
-                      Center(
-                        child: Column(
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                '¿Olvidaste tu contraseña?',
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: colorPrimaryComplementary,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          BlocBuilder<LoginBloc, LoginState>(
+                            builder: (context, state) {
+                              TextEditingController emailController =
+                                  TextEditingController(text: state.email);
+                              TextEditingController passwordController =
+                                  TextEditingController(text: state.password);
+                              return Column(
+                                children: [
+                                  TextField(
+                                    controller: emailController,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Correo',
+                                      suffixIcon: Icon(Icons.email),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  TextField(
+                                    controller: passwordController,
+                                    obscureText: true,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Contraseña',
+                                      suffixIcon: Icon(Icons.visibility_off),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 30.0),
+                          Center(
+                            child: Column(
+                              children: [
+                                TextButton(
+                                  onPressed: () {},
+                                  child: const Text(
+                                    '¿Olvidaste tu contraseña?',
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: colorPrimaryComplementary,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                GestureDetector(
+                                  onTap: _auth,
+                                  child: const GeneralButtonWidget(
+                                      text: 'Iniciar Sesión'),
+                                ),
+                                const SizedBox(height: 35.0),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterView()));
+                                  },
+                                  child: const GeneralButtonWidget(
+                                      text: 'Registrarse'),
+                                ),
+                                const Text("O"),
+                                IconButton(
+                                  onPressed: _auth,
+                                  icon: const Icon(Icons.fingerprint),
+                                ),
+                              ],
                             ),
-                            GestureDetector(
-                              onTap: _auth,
-                              child: const GeneralButtonWidget(
-                                  text: 'Iniciar Sesión'),
-                            ),
-                            const SizedBox(height: 35.0),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => RegisterView()));
-                              },
-                              child: const GeneralButtonWidget(
-                                  text: 'Registrarse'),
-                            ),
-                            const Text("O"),
-                            IconButton(
-                              onPressed: _auth,
-                              icon: const Icon(Icons.fingerprint),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

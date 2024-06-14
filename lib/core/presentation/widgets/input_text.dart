@@ -4,8 +4,9 @@ import 'package:fresh_start/styles.dart';
 class InputText extends StatelessWidget {
   final Icon? iconPlaceholder;
   final String placeholder;
+  final TextEditingController controller;
 
-  const InputText({Key? key, this.iconPlaceholder, required this.placeholder}) : super(key: key);
+  const InputText({Key? key, this.iconPlaceholder, required this.placeholder, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class InputText extends StatelessWidget {
           const SizedBox(width: 8.0),
           Expanded(
             child: TextField(
+              controller: controller,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: placeholder,

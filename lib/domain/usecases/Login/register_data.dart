@@ -1,5 +1,5 @@
-import 'package:fresh_start/domain/models/register_model.dart';
-import 'package:fresh_start/domain/repositories/rergister_repository.dart';
+import 'package:fresh_start/domain/models/Auth/register_model.dart';
+import 'package:fresh_start/domain/repositories/Auth/register_repository.dart';
 
 class RegisterData {
   final RegisterRepository repository;
@@ -7,7 +7,7 @@ class RegisterData {
   RegisterData(this.repository);
 
   Future<RegisterModel> call() async {
-    final registerData = await repository.loadRegister();
+    final registerData = await repository.loadRegisterData();
 
     
     if (registerData.name.isEmpty) {

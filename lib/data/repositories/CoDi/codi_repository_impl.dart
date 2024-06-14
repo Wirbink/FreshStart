@@ -1,0 +1,15 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+import 'package:fresh_start/domain/models/CoDi/codi_model.dart';
+import 'package:fresh_start/domain/repositories/CoDi/codi_repository.dart';
+
+class CodiRepositoryImpl implements CodiRepository {
+  @override
+  Future<CodiModel> loadCodiData() async {
+    final response = await rootBundle.loadString('assets/json_data/CoDi/codi.json');
+    final data = json.decode(response);
+    print(data);
+    return CodiModel.fromJson(data);
+  }
+}

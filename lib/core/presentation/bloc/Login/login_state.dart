@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fresh_start/domain/models/login_model.dart';
+import 'package:fresh_start/domain/models/Auth/login_model.dart';
 
 class LoginState extends Equatable {
   final String email;

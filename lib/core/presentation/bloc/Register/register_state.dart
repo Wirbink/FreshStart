@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fresh_start/domain/models/register_model.dart';
+import 'package:fresh_start/domain/models/Auth/register_model.dart';
 
 class RegisterState extends Equatable {
   final String name;

@@ -6,7 +6,7 @@ import 'package:fresh_start/core/presentation/bloc/Login/login_state.dart';
 import 'package:fresh_start/core/presentation/views/home.dart';
 import 'package:fresh_start/core/presentation/views/register_view.dart';
 import 'package:fresh_start/core/presentation/widgets/general_button.dart';
-import 'package:fresh_start/domain/repositories/login_repository_impl.dart';
+import 'package:fresh_start/data/repositories/Auth/login_repository_impl.dart';
 import 'package:fresh_start/domain/usecases/Login/login_data.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:local_auth/local_auth.dart';

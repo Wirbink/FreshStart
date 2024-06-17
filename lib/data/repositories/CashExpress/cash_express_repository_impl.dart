@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:fresh_start/domain/models/CashExpress/cash_express_model.dart';
-import 'package:fresh_start/domain/repositories/CashExpres/cash_express_repository.dart';
+import 'package:fresh_start/domain/repositories/CashExpress/cash_express_repository.dart';
 
 class CashExpressRepositoryImpl implements CashExpressRepository {
   @override

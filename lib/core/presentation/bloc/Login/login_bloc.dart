@@ -38,7 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     bool _vadilateLogin() {
       final model = state;
       return model.email.isNotEmpty &&
-      model.password.isEmpty &&
-      model.remember == null;
+      model.password.isNotEmpty &&
+      model.remember != null;
     }
 }

@@ -9,7 +9,7 @@ import 'package:fresh_start/core/presentation/views/Services%20Payment/services_
 import 'package:fresh_start/core/presentation/views/Transfers/National%20Transfers/transfers_view.dart';
 import 'package:fresh_start/core/presentation/widgets/home/home_card.dart';
 import 'package:fresh_start/core/presentation/widgets/home/other_service_service.dart';
-import '../widgets/home/service_icon_button.dart';
+import 'package:fresh_start/core/presentation/widgets/home/service_icon_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -182,7 +182,7 @@ class HomePage extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const CashExpress()));
+                                                const CashExpressView()));
                                   },
                                 ),
                                 ServiceIconButton(

@@ -24,9 +24,8 @@ class CashExpressBloc extends Bloc<CashExpressEvent, CashExpressState> {
     });
 
     on<CardNumberChanged>((event, emit) {
-      String formattedCardNumber = _formatCardNumber(event.cardNumber);
       emit(state.copyWith(
-          cardNumber: formattedCardNumber, isValid: _validateCashExpress()));
+          cardNumber: event.cardNumber, isValid: _validateCashExpress()));
     });
 
     on<BalanceChanged>((event, emit) {
@@ -88,14 +87,4 @@ class CashExpressBloc extends Bloc<CashExpressEvent, CashExpressState> {
     model.withdrawalKey.isNotEmpty &&
     model.securityCode.isNotEmpty;
   }
-
-  String _formatCardNumber(String cardNumber) {
-      if (cardNumber.length >= 4) {
-        String visiblePart = cardNumber.substring(cardNumber.length - 4);
-        String hiddenPart = cardNumber.substring(0, cardNumber.length - 4).replaceAllMapped(RegExp(r'•{4}'), (match) => '${match.group(0)}.');
-        return hiddenPart + visiblePart;
-      } else {
-        return cardNumber;
-      }
-    }
 }

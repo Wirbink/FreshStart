@@ -7,7 +7,7 @@ import 'package:fresh_start/domain/repositories/CashExpress/cash_express_reposit
 class CashExpressRepositoryImpl implements CashExpressRepository {
   @override
   Future<CashExpressModel> loadCashExpressData() async {
-    final response = await rootBundle.loadString('/json_data/CashExpress/cash_express.json');
+    final response = await rootBundle.loadString('json_data/CashExpress/cash_express.json');
     final data = json.decode(response);
     print(data);
     return CashExpressModel.fromJson(data);

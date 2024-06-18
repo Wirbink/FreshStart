@@ -10,6 +10,7 @@ import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
 import 'package:fresh_start/data/repositories/CashExpress/cash_express_repository_impl.dart';
 import 'package:fresh_start/domain/usecases/CashExpress/cash_express_data.dart';
 import 'package:fresh_start/styles.dart';
+import 'package:intl/intl.dart';
 
 class CashExpressView extends StatefulWidget {
   const CashExpressView({super.key});
@@ -30,7 +31,11 @@ class _CashExpressState extends State<CashExpressView> {
           body: SafeArea(
             child: Center(child: BlocBuilder<CashExpressBloc, CashExpressState>(
               builder: (context, state) {
+                TextEditingController importController =
+                    TextEditingController(text: state.amount.toString());
 
+                String formattedDate = formatDate(state.date);
+                String formattedTime = formatTime(state.date);
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,19 +130,19 @@ class _CashExpressState extends State<CashExpressView> {
                             const SizedBox(
                               height: 12.0,
                             ),
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '05/27',
-                                  style: TextStyle(
+                                  state.vencimiento,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                   ),
                                 ),
                                 Text(
-                                  '366',
-                                  style: TextStyle(
+                                  state.cvv,
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 16),
                                 ),
                               ],
@@ -164,6 +169,7 @@ class _CashExpressState extends State<CashExpressView> {
                         SizedBox(
                           width: 125,
                           child: TextFormField(
+                            controller: importController,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                             ),
@@ -179,7 +185,16 @@ class _CashExpressState extends State<CashExpressView> {
                     const SizedBox(height: 171),
                     ElevatedButton(
                       onPressed: () {
-                        _showBottomSheet(context);
+                        _showBottomSheet(
+                            context,
+                            state.sender,
+                            state.senderAccount,
+                            state.cardNumber,
+                            formattedDate,
+                            formattedTime,
+                            state.withdrawalKey,
+                            state.securityCode,
+                            state.amount.toString());
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
@@ -206,7 +221,16 @@ class _CashExpressState extends State<CashExpressView> {
         ));
   }
 
-  void _showBottomSheet(BuildContext context) {
+  void _showBottomSheet(
+      BuildContext context,
+      String sender,
+      String senderAccount,
+      String cardNumber,
+      String date,
+      String time,
+      String withdrawalKey,
+      String securityCode,
+      String amount) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -241,10 +265,10 @@ class _CashExpressState extends State<CashExpressView> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Pagó",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -254,8 +278,8 @@ class _CashExpressState extends State<CashExpressView> {
                     ),
                   ),
                   Text(
-                    "Brayn Sahagun",
-                    style: TextStyle(
+                    sender,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'MarkPro',
@@ -265,10 +289,10 @@ class _CashExpressState extends State<CashExpressView> {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Cuenta",
                     style: TextStyle(
                       fontSize: 15.0,
@@ -278,8 +302,8 @@ class _CashExpressState extends State<CashExpressView> {
                     ),
                   ),
                   Text(
-                    "5558 •••• •••• ••84",
-                    style: TextStyle(
+                    cardNumber,
+                    style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'MarkPro',
@@ -289,10 +313,10 @@ class _CashExpressState extends State<CashExpressView> {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Clabe Destino",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -302,8 +326,8 @@ class _CashExpressState extends State<CashExpressView> {
                     ),
                   ),
                   Text(
-                    "123456789012345678",
-                    style: TextStyle(
+                    senderAccount,
+                    style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'Roboto',
@@ -313,10 +337,10 @@ class _CashExpressState extends State<CashExpressView> {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Fecha",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -326,8 +350,8 @@ class _CashExpressState extends State<CashExpressView> {
                     ),
                   ),
                   Text(
-                    "17 Abril, 2024",
-                    style: TextStyle(
+                    date,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'MarkPro',
@@ -337,12 +361,12 @@ class _CashExpressState extends State<CashExpressView> {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "7:08 pm",
-                    style: TextStyle(
+                    time,
+                    style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'MarkPro',
@@ -354,10 +378,10 @@ class _CashExpressState extends State<CashExpressView> {
               const SizedBox(
                 height: 8.0,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Clave de Retiro",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -367,8 +391,8 @@ class _CashExpressState extends State<CashExpressView> {
                     ),
                   ),
                   Text(
-                    "5533 4387 2123",
-                    style: TextStyle(
+                    withdrawalKey,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Roboto',
@@ -394,10 +418,10 @@ class _CashExpressState extends State<CashExpressView> {
               const SizedBox(
                 height: 8.0,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Código de seguridad",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -407,8 +431,8 @@ class _CashExpressState extends State<CashExpressView> {
                     ),
                   ),
                   Text(
-                    "1512",
-                    style: TextStyle(
+                    securityCode,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Roboto',
@@ -434,10 +458,10 @@ class _CashExpressState extends State<CashExpressView> {
               const SizedBox(
                 height: 8.0,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Monto",
                     style: TextStyle(
                       fontSize: 25.0,
@@ -447,8 +471,8 @@ class _CashExpressState extends State<CashExpressView> {
                     ),
                   ),
                   Text(
-                    "\$32,524",
-                    style: TextStyle(
+                    "\$ $amount",
+                    style: const TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.w700,
                       fontFamily: 'Roboto',
@@ -505,5 +529,15 @@ class _CashExpressState extends State<CashExpressView> {
         );
       },
     );
+  }
+
+  String formatDate(DateTime date) {
+    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy');
+    return dateFormatter.format(date);
+  }
+
+  String formatTime(DateTime date) {
+    final DateFormat timeFormatter = DateFormat('hh:mm a');
+    return timeFormatter.format(date);
   }
 }

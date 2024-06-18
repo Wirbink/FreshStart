@@ -37,4 +37,4 @@ class AmountAccountChanged extends StatementAccountEvent {
   List<Object> get props => [amountAccount];
 }
 
-class AmountAccountSubmitted extends StatementAccountEvent {}
+class StatementAccountSubmitted extends StatementAccountEvent {}

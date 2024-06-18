@@ -54,13 +54,13 @@ class AmountChanged extends CodiEvent {
   List<Object> get props => [amount];
 }
 
-class SenderChanged extends CodiEvent {
-  final String sender;
+class ConceptChanged extends CodiEvent {
+  final String concept;
 
-  const SenderChanged(this.sender);
+  const ConceptChanged(this.concept);
 
   @override
-  List<Object> get props => [sender];
+  List<Object> get props => [concept];
 }
 
 class CodiSubmitted extends CodiEvent {}

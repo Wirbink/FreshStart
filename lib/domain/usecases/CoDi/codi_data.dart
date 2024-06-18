@@ -30,14 +30,15 @@ class CodiData {
     if (!_isValidAmount(codiData.amount)) {
       throw Exception('Invalid amount');
     }
-    if (codiData.sender.isEmpty) {
+    if (codiData.concept.isEmpty) {
       throw Exception('Sender cannot be empty');
     }
   }
 
   bool _isValidCardNumber(String cardNumber) {
+    String cardNumberWithoutSpace = cardNumber.replaceAll(" ", "");
     // Validate card number (e.g., Luhn algorithm)
-    return cardNumber.length == 16; // Simplified example
+    return cardNumberWithoutSpace.length == 16; // Simplified example
   }
 
   bool _isValidBalance(double balance) {

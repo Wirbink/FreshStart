@@ -9,7 +9,7 @@ class CodiModel {
   String vencimiento;
   String cvv;
   double amount;
-  String sender;
+  String concept;
 
   CodiModel({
     required this.cardNumber,
@@ -17,7 +17,7 @@ class CodiModel {
     required this.vencimiento,
     required this.cvv,
     required this.amount,
-    required this.sender
+    required this.concept
   });
 
   factory CodiModel.fromJson(Map<String, dynamic> json) => _$CodiModelFromJson(json);

@@ -12,7 +12,7 @@ CodiModel _$CodiModelFromJson(Map<String, dynamic> json) => CodiModel(
       vencimiento: json['vencimiento'] as String,
       cvv: json['cvv'] as String,
       amount: (json['amount'] as num).toDouble(),
-      sender: json['sender'] as String,
+      concept: json['concept'] as String,
     );
 
 Map<String, dynamic> _$CodiModelToJson(CodiModel instance) => <String, dynamic>{
@@ -21,5 +21,5 @@ Map<String, dynamic> _$CodiModelToJson(CodiModel instance) => <String, dynamic>{
       'vencimiento': instance.vencimiento,
       'cvv': instance.cvv,
       'amount': instance.amount,
-      'sender': instance.sender,
+      'concept': instance.concept,
     };

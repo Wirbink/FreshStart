@@ -6,7 +6,7 @@ class ContactData {
 
   ContactData(this.repository);
 
-  Future<List<ContactModel>> fetchContactData() async {
+  Future<List<ContactModel>> call() async {
     final contactData = await repository.loadContactsData();
 
     for (var contact in contactData) {
@@ -17,10 +17,12 @@ class ContactData {
   }
 
   void _validateContact(ContactModel contact) {
+    String cardNumberWithoutSpace = contact.cardNumber.replaceAll(' ', '');
+
     if (contact.clabe.isEmpty || contact.clabe.length != 18) {
       throw Exception('Invalid CLABE: ${contact.clabe}');
     }
-    if (contact.cardNumber.isEmpty || contact.cardNumber.length != 16) {
+    if (contact.cardNumber.isEmpty || cardNumberWithoutSpace.length != 16) {
       throw Exception('Invalid Card Number: ${contact.cardNumber}');
     }
     if (contact.spent < 0) {
@@ -34,6 +36,9 @@ class ContactData {
     }
     if (contact.voucher.isEmpty) {
       throw Exception('Voucher cannot be empty');
+    }
+    if (contact.name.isEmpty) {
+      throw Exception('Name cannot be empty');
     }
   }
 }

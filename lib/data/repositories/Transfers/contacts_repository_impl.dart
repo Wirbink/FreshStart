@@ -7,14 +7,17 @@ import 'package:fresh_start/domain/repositories/Transfers/contact_repository.dar
 class ContactsRepositoryImpl implements ContactRepository {
   @override
   Future<List<ContactModel>> loadContactsData() async {
-    final response = await rootBundle.loadString('assets/json_data/Transfers/contacts.json');
-    final data = json.decode(response) as List<dynamic>; // Cast to List<dynamic>
-
+    final response =
+        await rootBundle.loadString('json_data/Transfers/contacts.json');
+    final data =
+        json.decode(response) as List<dynamic>; // Cast to List<dynamic>
     if (data == null || data.isEmpty) {
-      throw Exception('Error loading contacts data. Please check the JSON file.');
+      throw Exception(
+          'Error loading contacts data. Please check the JSON file.');
     }
 
-    final contacts = data.map((contact) => ContactModel.fromJson(contact)).toList();
+    final contacts =
+        data.map((contact) => ContactModel.fromJson(contact)).toList();
     print(contacts);
     return contacts;
   }

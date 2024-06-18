@@ -16,7 +16,7 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
             voucher: '')) {
     on<LoadContactDataEvent>((event, emit) async {
       final contact = await contactData();
-      emit(ContactState.fromModel(contact));
+      emit(ContactState.fromModel(contact[0]));
     });
 
     on<ClabeChanged>((event, emit) {

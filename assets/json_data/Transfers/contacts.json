@@ -5,7 +5,9 @@
         "spent": 2500.00,
         "date": "2024-06-09T19:52:00",
         "bill": "217197305 UPQROO",
-        "voucher": "001111810"
+        "voucher": "001111810",
+        "name": "Irving Coyolt"
+
     },
     {
         "clabe": "123456789012345678",
@@ -13,6 +15,26 @@
         "spent": 2500.00,
         "date": "2024-06-09T19:52:00",
         "bill": "217197305 UPQROO",
-        "voucher": "001111810"
+        "voucher": "001111810",
+        "name": "Jessica Márquez"
+    },
+    {
+        "clabe": "123456789012345678",
+        "cardNumber": "4444 4444 4444 4444",
+        "spent": 2500.00,
+        "date": "2024-06-09T19:52:00",
+        "bill": "217197305 UPQROO",
+        "voucher": "001111810",
+        "name": "Irving Coyolt"
+
+    },
+    {
+        "clabe": "123456789012345678",
+        "cardNumber": "4444 4444 4444 4444",
+        "spent": 2500.00,
+        "date": "2024-06-09T19:52:00",
+        "bill": "217197305 UPQROO",
+        "voucher": "001111810",
+        "name": "Jessica Márquez"
     }
 ]

@@ -10,6 +10,7 @@ class ContactModel {
   DateTime date;
   String bill;
   String voucher;
+  String name;
 
   ContactModel({
     required this.clabe,
@@ -17,7 +18,8 @@ class ContactModel {
     required this.spent,
     required this.date,
     required this.bill,
-    required this.voucher
+    required this.voucher,
+    required this.name
   });
 
   factory ContactModel.fromJson(Map<String, dynamic> json) => _$ContactModelFromJson(json);

@@ -8,7 +8,7 @@ import 'package:fresh_start/core/presentation/views/Cash%20Express/cash_express_
 import 'package:fresh_start/core/presentation/views/Services%20Payment/services_payment_view.dart';
 import 'package:fresh_start/core/presentation/views/Transfers/National%20Transfers/transfers_view.dart';
 import 'package:fresh_start/core/presentation/widgets/home/home_card.dart';
-import 'package:fresh_start/core/presentation/widgets/home/other_service_service.dart';
+import 'package:fresh_start/core/presentation/widgets/home/other_service.dart';
 import 'package:fresh_start/core/presentation/widgets/home/service_icon_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -261,14 +261,14 @@ class HomePage extends StatelessWidget {
                       )
                     ],
                   ),
-                  const HomeCard(),
-                  const HomeCard(),
-                  const HomeCard(),
-                  const HomeCard(),
-                  const HomeCard(),
-                  const HomeCard(),
-                  const HomeCard(),
-                  const HomeCard(),
+                  // const HomeCard(),
+                  // const HomeCard(),
+                  // const HomeCard(),
+                  // const HomeCard(),
+                  // const HomeCard(),
+                  // const HomeCard(),
+                  // const HomeCard(),
+                  // const HomeCard(),
                 ],
               ),
             ),

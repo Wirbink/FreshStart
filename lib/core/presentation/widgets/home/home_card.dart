@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/views/estado_cuenta_view.dart';
 import 'package:fresh_start/styles.dart';
+import 'package:intl/intl.dart';
 
 class HomeCard extends StatelessWidget {
+  final String name;
+  final String bill;
+  final double spent;
+  final DateTime date;
+
   const HomeCard({
     super.key,
+    required this.name,
+    required this.bill,
+    required this.spent,
+    required this.date,
   });
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    String contactInitials = getInitials(name);
+    String formattedDate = formatDate(date);
+    String formattedTime = formatTime(date);
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -38,20 +50,20 @@ class HomeCard extends StatelessWidget {
           top: 5.0,
           bottom: 5.0,
         ),
-        child: const Row(
+        child: Row(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: CircleAvatar(
                     backgroundColor: colorSecondaryComplementary,
                     radius: 25.0,
                     child: Text(
-                      'IC',
-                      style: TextStyle(
+                      contactInitials,
+                      style: const TextStyle(
                         fontFamily: 'MarkPro',
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -66,17 +78,17 @@ class HomeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Irving Coyolt',
-                  style: TextStyle(
+                  name,
+                  style: const TextStyle(
                     fontFamily: 'MarkPro',
-                    fontSize: 20.0,
+                    fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     color: colorMainText,
                   ),
                 ),
                 Text(
-                  'Transferencia',
-                  style: TextStyle(
+                  bill,
+                  style: const TextStyle(
                     fontFamily: 'MarkPro',
                     fontSize: 15.0,
                     fontWeight: FontWeight.w400,
@@ -85,15 +97,15 @@ class HomeCard extends StatelessWidget {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "\$ 2,500.00",
-                    style: TextStyle(
+                    "\$ $spent",
+                    style: const TextStyle(
                       fontFamily: 'MarkPro',
                       fontSize: 20.0,
                       color: colorMainText,
@@ -104,8 +116,8 @@ class HomeCard extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "20-01-2024",
-                            style: TextStyle(
+                            formattedDate,
+                            style: const TextStyle(
                               fontFamily: 'MarkPro',
                               fontSize: 12,
                               color: colorTertearyText,
@@ -113,14 +125,14 @@ class HomeCard extends StatelessWidget {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10.0,
                       ),
                       Column(
                         children: [
                           Text(
-                            "11:24 PM",
-                            style: TextStyle(
+                            formattedTime,
+                            style: const TextStyle(
                               fontFamily: 'MarkPro',
                               fontSize: 12,
                               color: colorTertearyText,
@@ -137,5 +149,27 @@ class HomeCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  //Funciones de apoyo
+  String getInitials(String name) {
+    List<String> names = name.split(' ');
+    String initials = '';
+    for (var part in names) {
+      if (part.isNotEmpty) {
+        initials += part[0];
+      }
+    }
+    return initials.toUpperCase();
+  }
+
+  String formatDate(DateTime date) {
+    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy');
+    return dateFormatter.format(date);
+  }
+
+  String formatTime(DateTime date) {
+    final DateFormat timeFormatter = DateFormat('hh:mm a');
+    return timeFormatter.format(date);
   }
 }

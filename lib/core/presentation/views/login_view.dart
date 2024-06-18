@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/Login/login_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/Login/login_event.dart';
 import 'package:fresh_start/core/presentation/bloc/Login/login_state.dart';
-import 'package:fresh_start/core/presentation/views/home.dart';
+import 'package:fresh_start/core/presentation/views/home_view.dart';
 import 'package:fresh_start/core/presentation/views/register_view.dart';
 import 'package:fresh_start/core/presentation/widgets/general_button.dart';
 import 'package:fresh_start/data/repositories/Auth/login_repository_impl.dart';
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement<void, void>(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => const HomePage(),
+          builder: (BuildContext context) => const HomeView(),
         ),
       );
     } else {

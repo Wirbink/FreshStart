@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/CoDi/codi_event.dart';
 import 'package:fresh_start/core/presentation/bloc/CoDi/codi_state.dart';
@@ -15,7 +13,7 @@ class CodiBloc extends Bloc<CodiEvent, CodiState> {
             vencimiento: '',
             cvv: '',
             amount: 0.0,
-            sender: '')) {
+            concept: '')) {
     on<LoadCodiDataEvent>((event, emit) async {
       final codi = await codiData();
       emit(CodiState.fromModel(codi));
@@ -44,8 +42,8 @@ class CodiBloc extends Bloc<CodiEvent, CodiState> {
       emit(state.copyWith(amount: event.amount, isValid: _validateCodi()));
     });
 
-    on<SenderChanged>((event, emit) {
-      emit(state.copyWith(sender: event.sender, isValid: _validateCodi()));
+    on<ConceptChanged>((event, emit) {
+      emit(state.copyWith(concept: event.concept, isValid: _validateCodi()));
     });
   }
 
@@ -56,7 +54,7 @@ class CodiBloc extends Bloc<CodiEvent, CodiState> {
         model.vencimiento.isNotEmpty &&
         model.cvv.isNotEmpty &&
         model.amount != null &&
-        model.sender.isNotEmpty;
+        model.concept.isNotEmpty;
   }
 
   String _formatCardNumber(String cardNumber) {

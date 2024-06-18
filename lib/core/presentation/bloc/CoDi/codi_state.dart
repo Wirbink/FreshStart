@@ -7,7 +7,7 @@ class CodiState extends Equatable {
   final String vencimiento;
   final String cvv;
   final double amount;
-  final String sender;
+  final String concept;
 
   const CodiState({
     this.cardNumber = '',
@@ -15,7 +15,7 @@ class CodiState extends Equatable {
     this.vencimiento = '',
     this.cvv = '',
     this.amount = 0,
-    this.sender = '',
+    this.concept = '',
   });
 
   factory CodiState.fromModel(CodiModel model) {
@@ -25,7 +25,7 @@ class CodiState extends Equatable {
         vencimiento: model.vencimiento,
         cvv: model.cvv,
         amount: model.amount,
-        sender: model.sender);
+        concept: model.concept);
   }
 
   CodiState copyWith({
@@ -34,7 +34,7 @@ class CodiState extends Equatable {
     String? vencimiento,
     String? cvv,
     double? amount,
-    String? sender,
+    String? concept,
     bool? isValid
   }) {
     return CodiState(
@@ -43,10 +43,10 @@ class CodiState extends Equatable {
         vencimiento: vencimiento ?? this.vencimiento,
         cvv: cvv ?? this.cvv,
         amount: amount ?? this.amount,
-        sender: sender ?? this.sender);
+        concept: concept ?? this.concept);
   }
 
   @override
   List<Object> get props =>
-      [cardNumber, balance, vencimiento, cvv, amount, sender];
+      [cardNumber, balance, vencimiento, cvv, amount, concept];
 }

@@ -48,8 +48,9 @@ class CashExpressData {
   }
 
   bool _isValidCardNumber(String cardNumber) {
+    String cardNumberWithoutSpace = cardNumber.replaceAll(" ", "");
     // Validate card number
-    return cardNumber.length == 16;
+    return cardNumberWithoutSpace.length == 16;
   }
 
   bool _isValidBalance(double balance) {

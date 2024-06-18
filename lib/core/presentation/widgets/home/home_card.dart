@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/views/estado_cuenta_view.dart';
+import 'package:fresh_start/core/presentation/views/estado_cuenta_view2.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:intl/intl.dart';
 
@@ -8,6 +9,8 @@ class HomeCard extends StatelessWidget {
   final String bill;
   final double spent;
   final DateTime date;
+  final String voucher;
+  final String cardNumber;
 
   const HomeCard({
     super.key,
@@ -15,6 +18,8 @@ class HomeCard extends StatelessWidget {
     required this.bill,
     required this.spent,
     required this.date,
+    required this.voucher,
+    required this.cardNumber,
   });
 
   @override
@@ -28,7 +33,13 @@ class HomeCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const EstadoDeCuentaWidget1(),
+            builder: (context) => EstadoDeCuentaWidget(
+              spent: spent,
+              date: date,
+              bill: bill,
+              voucher: voucher,
+              cardNumber: cardNumber,
+            ),
           ),
         );
       },

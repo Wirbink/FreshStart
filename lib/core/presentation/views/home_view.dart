@@ -77,18 +77,20 @@ class _HomeViewState extends State<HomeView> {
                           ],
                         ),
                         ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: state.contacts.length,
-                            itemBuilder: (context, index) {
-                              return HomeCard(
-                                name: state.contacts[index].name,
-                                bill: state.contacts[index].bill,
-                                spent: state.contacts[index].spent,
-                                date: state.contacts[index].date,
-                              );
-                            },
-                          ),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.contacts.length,
+                          itemBuilder: (context, index) {
+                            return HomeCard(
+                              name: state.contacts[index].name,
+                              bill: state.contacts[index].bill,
+                              spent: state.contacts[index].spent,
+                              date: state.contacts[index].date,
+                              voucher: state.contacts[index].voucher,
+                              cardNumber: state.contacts[index].cardNumber,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),

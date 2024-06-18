@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/views/Cash%20Express/cash_express_view.dart';
-import 'package:fresh_start/core/presentation/views/home.dart';
 import 'package:fresh_start/core/presentation/views/home_view.dart';
 
 void main() {

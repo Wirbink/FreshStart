@@ -2,12 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
 import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
 import 'package:fresh_start/styles.dart';
+import 'package:intl/intl.dart';
 
 class EstadoDeCuentaWidget extends StatelessWidget {
-  const EstadoDeCuentaWidget({super.key});
+  final double spent;
+  final DateTime date;
+  final String bill;
+  final String voucher;
+  final String cardNumber;
+
+  const EstadoDeCuentaWidget(
+      {super.key,
+      required this.spent,
+      required this.date,
+      required this.bill,
+      required this.voucher,
+      required this.cardNumber});
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = formatDate(date);
+    String formattedTime = formatTime(date);
+    String formattedCardNumber = getLastFourDigits(cardNumber);
+
     return Scaffold(
       appBar: const AppBarWidget(titleAppBar: 'Cuenta'),
       body: SingleChildScrollView(
@@ -32,10 +49,10 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "FreshBank",
                       style: TextStyle(
                         fontSize: 50.0,
@@ -44,8 +61,8 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                         color: Color(0xFF060912),
                       ),
                     ),
-                    SizedBox(height: 8.0),
-                    CircleAvatar(
+                    const SizedBox(height: 8.0),
+                    const CircleAvatar(
                       backgroundColor: Color(0xFF20B087),
                       radius: 50,
                       child: Icon(
@@ -54,8 +71,8 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                         color: Color(0XFFFAFAFA),
                       ),
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       '¡Pago exitoso!',
                       style: TextStyle(
                         fontSize: 25.0,
@@ -64,37 +81,37 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                         color: Color(0xFF060912),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8.0,
                     ),
                     Text(
-                      '\$-53,600',
-                      style: TextStyle(
+                      '\$- $spent',
+                      style: const TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Roboto',
                         color: colorMainText,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8.0,
                     ),
                     Text(
-                      '06 ENE, 2024 -- 18:15',
-                      style: TextStyle(
+                      '$formattedDate -- $formattedTime',
+                      style: const TextStyle(
                         fontSize: 10.0,
                         fontWeight: FontWeight.w400,
                         fontFamily: 'MarkPro',
                         color: Color(0XFF696969),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8.0,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Factura",
                           style: TextStyle(
                             fontSize: 15.0,
@@ -104,8 +121,8 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "217197305 ",
-                          style: TextStyle(
+                          bill,
+                          style: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Roboto',
@@ -114,29 +131,13 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 160),
-                          child: Text(
-                            "Electrificadora del Huila",
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Roboto',
-                              color: Color(0xFF696969),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Comprobante",
                           style: TextStyle(
                             fontSize: 15.0,
@@ -146,8 +147,8 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "000001810",
-                          style: TextStyle(
+                          voucher,
+                          style: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Roboto',
@@ -156,11 +157,11 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Pagaste con",
                           style: TextStyle(
                             fontSize: 15.0,
@@ -170,8 +171,8 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Ahorros",
-                          style: TextStyle(
+                          formattedCardNumber,
+                          style: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Roboto',
@@ -180,23 +181,7 @@ class EstadoDeCuentaWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 267),
-                          child: Text(
-                            "****6705",
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Roboto',
-                              color: Color(0xFF696969),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12.0,
                     ),
                   ],
@@ -231,5 +216,25 @@ class EstadoDeCuentaWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  //Funciones de ayuda
+  String formatDate(DateTime date) {
+    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy');
+    return dateFormatter.format(date);
+  }
+
+  String formatTime(DateTime date) {
+    final DateFormat timeFormatter = DateFormat('hh:mm a');
+    return timeFormatter.format(date);
+  }
+
+  String getLastFourDigits(String cardNumber) {
+    // Remover los espacios en blanco
+    String cleaned = cardNumber.replaceAll(' ', '');
+    // Obtener los últimos cuatro dígitos
+    String lastFourDigits = cleaned.substring(cleaned.length - 4);
+    // Devolver el formato deseado
+    return '• $lastFourDigits';
   }
 }

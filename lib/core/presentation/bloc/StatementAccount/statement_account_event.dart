@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fresh_start/domain/models/Transfers/contact_model.dart';
 
 abstract class StatementAccountEvent extends Equatable {
   const StatementAccountEvent();
@@ -35,6 +35,15 @@ class AmountAccountChanged extends StatementAccountEvent {
 
   @override
   List<Object> get props => [amountAccount];
+}
+
+class ContactsChanged extends StatementAccountEvent {
+  final List<ContactModel> contacts;
+
+  const ContactsChanged(this.contacts);
+
+  @override
+  List<Object> get props => [contacts];
 }
 
 class StatementAccountSubmitted extends StatementAccountEvent {}

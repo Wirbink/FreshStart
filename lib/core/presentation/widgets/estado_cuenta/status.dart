@@ -1,26 +1,45 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/views/estado_cuenta_view2.dart';
 import 'package:fresh_start/styles.dart';
+import 'package:intl/intl.dart';
 
 class StatusWidget extends StatelessWidget {
+  final String clabe;
+  final String cardNumber;
+  final double spent;
+  final DateTime date;
+  final String bill;
+  final String voucher;
+
   const StatusWidget({
     super.key,
+    required this.clabe,
+    required this.cardNumber,
+    required this.spent,
+    required this.date,
+    required this.bill,
+    required this.voucher,
   });
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    String formattedDate = formatDate(date);
+    String formattedTime = formatTime(date);
+
     return GestureDetector(
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => EstadoDeCuentaWidget(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EstadoDeCuentaWidget(
+                spent: spent,
+                date: date,
+                bill: bill,
+                voucher: voucher,
+                cardNumber: cardNumber,
+              ),
+            ),
+          );
         },
         child: Container(
             margin: const EdgeInsets.only(top: 10.0, bottom: 7.5),
@@ -38,9 +57,9 @@ class StatusWidget extends StatelessWidget {
               top: 5.0,
               bottom: 5.0,
             ),
-            child: const Row(
+            child: Row(
               children: [
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -53,8 +72,8 @@ class StatusWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '0001TJ0117',
-                      style: TextStyle(
+                      clabe,
+                      style: const TextStyle(
                           fontFamily: 'MarkPro',
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500,
@@ -62,16 +81,9 @@ class StatusWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(
-                          Icons.circle_rounded,
-                          size: 5,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
                         Text(
-                          '1111',
-                          style: TextStyle(
+                          cardNumber,
+                          style: const TextStyle(
                               fontFamily: 'MarkPro',
                               fontSize: 15.0,
                               fontWeight: FontWeight.w400,
@@ -81,15 +93,15 @@ class StatusWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "\$ - 2,500.00",
-                        style: TextStyle(
+                        "\$ - $spent",
+                        style: const TextStyle(
                             fontFamily: 'MarkPro',
                             fontSize: 20.0,
                             color: colorMainText),
@@ -99,21 +111,21 @@ class StatusWidget extends StatelessWidget {
                           Column(
                             children: [
                               Text(
-                                "20-01-2024",
-                                style: TextStyle(
+                                formattedDate,
+                                style: const TextStyle(
                                     fontFamily: 'MarkPro',
                                     fontSize: 12,
                                     color: colorTertearyText),
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10.0,
                           ),
                           Column(
                             children: [
-                              Text("10:00 PM",
-                                  style: TextStyle(
+                              Text(formattedTime,
+                                  style: const TextStyle(
                                       fontFamily: 'MarkPro',
                                       fontSize: 12,
                                       color: colorTertearyText))
@@ -126,5 +138,15 @@ class StatusWidget extends StatelessWidget {
                 )
               ],
             )));
+  }
+
+  String formatDate(DateTime date) {
+    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy');
+    return dateFormatter.format(date);
+  }
+
+  String formatTime(DateTime date) {
+    final DateFormat timeFormatter = DateFormat('hh:mm a');
+    return timeFormatter.format(date);
   }
 }

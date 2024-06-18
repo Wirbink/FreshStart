@@ -15,10 +15,12 @@ class StatementAccountData {
   }
 
   void _validateStatementAccountData(StatementAccountModel data) {
+    String cardNumberWithoutSpaces = data.cardNumberAccount.replaceAll(" ", "");
+
     if (data.clabeAccount.isEmpty || data.clabeAccount.length != 18) {
       throw Exception('Invalid CLABE account: ${data.clabeAccount}');
     }
-    if (data.cardNumberAccount.isEmpty || data.cardNumberAccount.length != 16) {
+    if (data.cardNumberAccount.isEmpty || cardNumberWithoutSpaces.length != 16) {
       throw Exception('Invalid card number account: ${data.cardNumberAccount}');
     }
     if (data.amountAccount < 0) {

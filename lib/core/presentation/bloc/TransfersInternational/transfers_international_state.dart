@@ -13,7 +13,7 @@ class TransfersInternationalState extends Equatable {
   final double equivalent;
   final double comission;
   final double amount;
-  final String convert;
+  final String concept;
 
   TransfersInternationalState({
     this.senderName = '',
@@ -26,7 +26,7 @@ class TransfersInternationalState extends Equatable {
     this.equivalent = 0.0,
     this.comission = 0.0,
     this.amount = 10000.00,
-    this.convert = '',
+    this.concept = '',
     DateTime? date,
   }) : date = date ?? DateTime(2024, 6, 9, 19, 52);
 
@@ -43,7 +43,7 @@ class TransfersInternationalState extends Equatable {
         equivalent: model.equivalent,
         comission: model.comission,
         amount: model.amount,
-        convert: model.convert);
+        concept: model.concept);
   }
 
   TransfersInternationalState copyWith(
@@ -58,7 +58,7 @@ class TransfersInternationalState extends Equatable {
       double? equivalent,
       double? comission,
       double? amount,
-      String? convert,
+      String? concept,
       bool? isValid}) {
     return TransfersInternationalState(
         senderName: this.senderName,
@@ -72,7 +72,7 @@ class TransfersInternationalState extends Equatable {
         equivalent: this.equivalent,
         comission: this.comission,
         amount: this.amount,
-        convert: this.convert);
+        concept: this.concept);
   }
 
   @override
@@ -88,6 +88,6 @@ class TransfersInternationalState extends Equatable {
         equivalent,
         comission,
         amount,
-        convert
+        concept
       ];
 }

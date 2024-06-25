@@ -19,7 +19,7 @@ class TransfersInternationalBloc
             equivalent: 0.0,
             comission: 0.0,
             amount: 0.0,
-            convert: '',
+            concept: '',
             date: DateTime(2024, 6, 9, 19, 52))) {
     on<LoadTransfersInternationalDataEvent>((event, emit) async {
       final transferInternational = await transfersInternationalData();
@@ -83,8 +83,8 @@ class TransfersInternationalBloc
       emit(state.copyWith(amount: event.amount, isValid: _validateTransfersInternational()));
     });
 
-    on<ConvertChanged>((event, emit) {
-      emit(state.copyWith(convert: event.convert, isValid: _validateTransfersInternational()));
+    on<ConceptChanged>((event, emit) {
+      emit(state.copyWith(concept: event.concept, isValid: _validateTransfersInternational()));
     });
 
     on<DateChanged>((event, emit) {
@@ -103,7 +103,7 @@ class TransfersInternationalBloc
         model.equivalent != null &&
         model.comission != null &&
         model.amount != null &&
-        model.convert.isNotEmpty;
+        model.concept.isNotEmpty;
   }
 
   String _formatCardNumber(String cardNumber) {

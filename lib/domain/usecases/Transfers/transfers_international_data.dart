@@ -18,7 +18,9 @@ class TransfersInternationalData {
     if (data.senderName.isEmpty) {
       throw Exception('Sender name cannot be empty');
     }
-    if (data.cardNumber.isEmpty || data.cardNumber.length != 16) {
+
+    String cardNumberWithoutSpaces = data.cardNumber.replaceAll(" ", "");
+    if (cardNumberWithoutSpaces.isEmpty ||  cardNumberWithoutSpaces.length != 16) {
       throw Exception('Invalid card number: ${data.cardNumber}');
     }
     if (data.date.isAfter(DateTime.now())) {
@@ -27,7 +29,9 @@ class TransfersInternationalData {
     if (data.recipientName.isEmpty) {
       throw Exception('Recipient name cannot be empty');
     }
-    if (data.cardNumberRecipient.isEmpty || data.cardNumberRecipient.length != 16) {
+
+    String cardNumberRecipientWithoutSpaces = data.cardNumberRecipient.replaceAll(" ", "");
+    if (cardNumberRecipientWithoutSpaces.isEmpty || cardNumberRecipientWithoutSpaces.length != 16) {
       throw Exception('Invalid recipient card number: ${data.cardNumberRecipient}');
     }
     if (data.currencyConvert.isEmpty) {
@@ -48,7 +52,7 @@ class TransfersInternationalData {
     if (data.amount <= 0) {
       throw Exception('Amount must be greater than zero: ${data.amount}');
     }
-    if (data.convert.isEmpty) {
+    if (data.concept.isEmpty) {
       throw Exception('Convert cannot be empty');
     }
   }

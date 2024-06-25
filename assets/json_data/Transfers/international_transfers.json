@@ -1,5 +1,4 @@
 {
-    "bankName": "FreshStart",
     "senderName": "Brayn Sahagun",
     "cardNumber": "4444 4444 4444 4444",
     "date": "2024-06-09T19:52:00",
@@ -9,7 +8,7 @@
     "amountConvert": 1000.00,
     "currency": "MXN",
     "equivalent": 18477.89,
-    "commission": 1800,
+    "comission": 1800.00,
     "amount": 23522.35,
     "concept": "Pago de estudios"
 }

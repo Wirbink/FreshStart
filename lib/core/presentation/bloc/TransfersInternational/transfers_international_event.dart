@@ -108,13 +108,13 @@ class AmountChanged extends TransfersInternationalEvent {
   List<Object> get props => [amount];
 }
 
-class ConvertChanged extends TransfersInternationalEvent {
-  final String convert;
+class ConceptChanged extends TransfersInternationalEvent {
+  final String concept;
 
-  const ConvertChanged(this.convert);
+  const ConceptChanged(this.concept);
 
   @override
-  List<Object> get props => [convert];
+  List<Object> get props => [concept];
 }
 
 class TransfersInternationalSubmitted extends TransfersInternationalEvent {}

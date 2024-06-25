@@ -20,7 +20,7 @@ TransfersInternationalModel _$TransfersInternationalModelFromJson(
       equivalent: (json['equivalent'] as num).toDouble(),
       comission: (json['comission'] as num).toDouble(),
       amount: (json['amount'] as num).toDouble(),
-      convert: json['convert'] as String,
+      concept: json['concept'] as String,
     );
 
 Map<String, dynamic> _$TransfersInternationalModelToJson(
@@ -37,5 +37,5 @@ Map<String, dynamic> _$TransfersInternationalModelToJson(
       'equivalent': instance.equivalent,
       'comission': instance.comission,
       'amount': instance.amount,
-      'convert': instance.convert,
+      'concept': instance.concept,
     };

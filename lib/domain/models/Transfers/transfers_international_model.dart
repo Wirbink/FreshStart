@@ -15,7 +15,7 @@ class TransfersInternationalModel {
   double equivalent;
   double comission;
   double amount;
-  String convert;
+  String concept;
 
   TransfersInternationalModel({
     required this.senderName,
@@ -29,7 +29,7 @@ class TransfersInternationalModel {
     required this.equivalent,
     required this.comission,
     required this.amount,
-    required this.convert
+    required this.concept
   });
   
   factory TransfersInternationalModel.fromJson(Map<String, dynamic> json) => _$TransfersInternationalModelFromJson(json);

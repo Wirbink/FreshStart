@@ -20,7 +20,7 @@ class RechargeState extends Equatable {
       DateTime? date})
       : date = date ?? DateTime(2024, 6, 9, 19, 52);
 
-  factory RechargeState.fromModel(RechargeState model) {
+  factory RechargeState.fromModel(RechargesModel model) {
     return RechargeState(
         name: model.name,
         cardNumber: model.cardNumber,

@@ -7,7 +7,8 @@ import 'package:fresh_start/domain/repositories/Recharges/recharges_repository.d
 class RechargesRepositoryImpl implements RechargesRepository {
   @override
   Future<RechargesModel> loadRechargesData() async {
-    final response = await rootBundle.loadString('assets/json_data/Recharges/recharges.json');
+    final response =
+        await rootBundle.loadString('json_data/Recharges/recharges.json');
     final data = json.decode(response);
     print(data);
     return RechargesModel.fromJson(data);

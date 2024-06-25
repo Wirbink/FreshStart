@@ -7,7 +7,8 @@ import 'package:fresh_start/domain/repositories/Transfers/transfers_repository.d
 class TrasnfersRepositoryImpl implements TransfersRepository {
   @override
   Future<TransfersModel> loadTransfersData() async {
-    final response = await rootBundle.loadString('assets/json_data/Transfers/transfers.json');
+    final response =
+        await rootBundle.loadString('json_data/Transfers/transfers.json');
     final data = json.decode(response);
     print(data);
     return TransfersModel.fromJson(data);

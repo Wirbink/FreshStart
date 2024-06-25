@@ -3,12 +3,20 @@ import 'package:fresh_start/core/presentation/views/Transfers/National%20Transfe
 import 'package:fresh_start/styles.dart';
 
 class ContactCard extends StatelessWidget {
+  final String name;
+  final String clabe;
+
   const ContactCard({
     super.key,
+    required this.name,
+    required this.clabe,
   });
 
   @override
   Widget build(BuildContext context) {
+    String initials = getInitials(name);
+    String nickname = getNickname(name);
+
     return GestureDetector(
       child: Container(
           margin: const EdgeInsets.only(top: 10.0, bottom: 7.5),
@@ -26,20 +34,20 @@ class ContactCard extends StatelessWidget {
             top: 5.0,
             bottom: 5.0,
           ),
-          child: const Row(
+          child: Row(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: CircleAvatar(
                       backgroundColor: colorSecondaryComplementary,
                       radius: 25.0,
                       child: Text(
-                        'IC',
-                        style: TextStyle(
+                        initials,
+                        style: const TextStyle(
                             fontFamily: 'MarkPro',
                             fontSize: 25.0,
                             fontWeight: FontWeight.bold,
@@ -53,23 +61,23 @@ class ContactCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Irving',
-                    style: TextStyle(
+                    nickname,
+                    style: const TextStyle(
+                        fontFamily: 'MarkPro',
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.normal,
+                        color: colorMainText),
+                  ),
+                  Text(
+                    name,
+                    style: const TextStyle(
                         fontFamily: 'MarkPro',
                         fontSize: 15.0,
                         fontWeight: FontWeight.bold,
                         color: colorMainText),
                   ),
-                  Text(
-                    'IRVING COYOLT',
-                    style: TextStyle(
-                        fontFamily: 'MarkPro',
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold,
-                        color: colorMainText),
-                  ),
-                  Text(
-                    'Cuenta Maze Bank',
+                  const Text(
+                    'FreshBank',
                     style: TextStyle(
                         fontFamily: 'MarkPro',
                         fontSize: 15.0,
@@ -77,8 +85,8 @@ class ContactCard extends StatelessWidget {
                         color: colorBorder),
                   ),
                   Text(
-                    '0000 0000 0000',
-                    style: TextStyle(
+                    clabe,
+                    style: const TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 15.0,
                         fontWeight: FontWeight.w400,
@@ -89,9 +97,48 @@ class ContactCard extends StatelessWidget {
             ],
           )),
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const SecondNationalView()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const SecondNationalView()));
       },
     );
+  }
+
+
+  //Funciona de ayuda
+  String getInitials(String name) {
+    List<String> names = name.split(' ');
+    String initials = '';
+    for (var part in names) {
+      if (part.isNotEmpty) {
+        initials += part[0];
+      }
+    }
+    return initials.toUpperCase();
+  }
+
+
+  String getNickname(String name) {
+    List<String> names = name.split(' ');
+    if (names.length < 2) return name; // Si solo hay un nombre, devuelve el nombre original
+
+    String firstName = names[0];
+    String lastName = names[1];
+
+    String nickname = '';
+    if (firstName.length >= 3) {
+      nickname += firstName.substring(0, 3);
+    } else {
+      nickname += firstName;
+    }
+
+    if (lastName.length >= 3) {
+      nickname += lastName.substring(0, 3);
+    } else {
+      nickname += lastName;
+    }
+
+    return nickname;
   }
 }

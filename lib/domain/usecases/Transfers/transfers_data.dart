@@ -21,7 +21,9 @@ class TransfersData {
     if (data.senderName.isEmpty) {
       throw Exception('Sender name cannot be empty');
     }
-    if (data.cardNumber.isEmpty || data.cardNumber.length != 16) {
+
+    String cardNumberWitoutSpaces = data.cardNumber.replaceAll(" ", "");
+    if (data.cardNumber.isEmpty || cardNumberWitoutSpaces.length != 16) {
       throw Exception('Invalid card number: ${data.cardNumber}');
     }
     if (data.date.isAfter(DateTime.now())) {
@@ -30,7 +32,9 @@ class TransfersData {
     if (data.recipientName.isEmpty) {
       throw Exception('Recipient name cannot be empty');
     }
-    if (data.cardNumberRecipient.isEmpty || data.cardNumberRecipient.length != 16) {
+
+    String cardNumberRecipientWitoutSpaces = data.cardNumberRecipient.replaceAll(" ", "");
+    if (data.cardNumberRecipient.isEmpty || cardNumberRecipientWitoutSpaces.length != 16) {
       throw Exception('Invalid recipient card number: ${data.cardNumberRecipient}');
     }
     if (data.amount <= 0) {

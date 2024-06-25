@@ -1,186 +1,229 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fresh_start/core/presentation/bloc/Recharge/recharge_bloc.dart';
+import 'package:fresh_start/core/presentation/bloc/Recharge/recharge_event.dart';
+import 'package:fresh_start/core/presentation/bloc/Recharge/recharge_state.dart';
 import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
+import 'package:fresh_start/data/repositories/Recharges/recharges_repository_impl.dart';
+import 'package:fresh_start/domain/usecases/Recharges/recharges_data.dart';
+import 'package:intl/intl.dart';
 
 class ServiceNumber extends StatelessWidget {
   const ServiceNumber({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppBarWidget(titleAppBar: "Recarga"),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
+    return BlocProvider(
+      create: (context) =>
+          RechargeBloc(RechargesData(RechargesRepositoryImpl()))
+            ..add(LoadRechargeDataEvent()),
+      child: BlocBuilder<RechargeBloc, RechargeState>(
+        builder: (context, state) {
+          TextEditingController phoneNumberController =
+              TextEditingController(text: state.phoneNumber);
+          TextEditingController amountController =
+              TextEditingController(text: state.amount.toString());
+
+          String formattedDate = formatDate(state.date);
+          String formattedTime = formatTime(state.date);
+
+          List<String> items = [
+            "FreshStart",
+            "BBVA",
+            "Banco Azteca",
+            "Banamex"
+          ];
+
+          if (!items.contains(state.payment)) {
+            items.add(state.payment);
+          }
+
+          return Scaffold(
+            appBar: AppBarWidget(titleAppBar: state.payment),
+            body: SingleChildScrollView(
+              child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 4.0),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        "Número de Télefono",
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 3,
+                            blurRadius: 7,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const SizedBox(height: 4.0),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Número de Télefono",
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'MarkPro',
+                                color: Color(0xFF060912),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          TextFormField(
+                            controller:
+                                phoneNumberController, ////Controller////
+                            keyboardType: TextInputType.phone,
+                            maxLength: 10,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 16.0),
+                              labelText: "Ingrese el número de teléfono",
+                              labelStyle: const TextStyle(color: Colors.black),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Pagar con",
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'MarkPro',
+                                color: Color(0xFF060912),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          DropdownButtonFormField<String>(
+                            value: "FreshStart",
+                            items: items.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 16.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.black),
+                              ),
+                            ),
+                            onChanged: (String? value) {},
+                          ),
+                          const SizedBox(height: 8.0),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Tipo de Recarga",
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'MarkPro',
+                                color: Color(0xFF060912),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          DropdownButtonFormField<String>(
+                            value: "Tiempo Aire",
+                            items: ["Tiempo Aire"].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 16.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.black),
+                              ),
+                            ),
+                            onChanged: (String? value) {},
+                          ),
+                          const SizedBox(height: 8.0),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Monto",
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'MarkPro',
+                                color: Color(0xFF060912),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          TextFormField(
+                            controller: amountController,
+                            keyboardType: TextInputType.number,
+                            maxLength: 10,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 16.0),
+                              labelText: "Ingrese el monto",
+                              labelStyle: const TextStyle(color: Colors.black),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 180.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        _showBottomSheet(context, state.name, state.cardNumber, formattedDate, formattedTime, state.type, state.amount.toString(), state.phoneNumber);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF1A2D4D),
+                        padding: const EdgeInsets.symmetric(vertical: 18.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: const Text(
+                        "Pagar",
                         style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'MarkPro',
-                          color: Color(0xFF060912),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    TextFormField(
-                      keyboardType: TextInputType.phone,
-                      maxLength: 10,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 16.0),
-                        labelText: "Ingrese el número de teléfono",
-                        labelStyle: const TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        "Pagar con",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'MarkPro',
-                          color: Color(0xFF060912),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    DropdownButtonFormField<String>(
-                      items: ["FreshStart", "BBVA", "Banco Azteca", "Banamex"]
-                          .map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 16.0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                      ),
-                      onChanged: (String? value) {},
-                    ),
-                    const SizedBox(height: 8.0),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        "Tipo de Recarga",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'MarkPro',
-                          color: Color(0xFF060912),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    DropdownButtonFormField<String>(
-                      items: ["Tiempo Aire"].map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 16.0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
-                      ),
-                      onChanged: (String? value) {},
-                    ),
-                    const SizedBox(height: 8.0),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        "Monto",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'MarkPro',
-                          color: Color(0xFF060912),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      maxLength: 10,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 16.0),
-                        labelText: "Ingrese el monto",
-                        labelStyle: const TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.0),
-                          borderSide: const BorderSide(color: Colors.black),
-                        ),
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'MarkPro'),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 180.0),
-              ElevatedButton(
-                onPressed: () {
-                  _showBottomSheet(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: const Color(0xFF1A2D4D),
-                  padding: const EdgeInsets.symmetric(vertical: 18.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-                child: const Text(
-                  "Pagar",
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: 'MarkPro'),
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  void _showBottomSheet(BuildContext context) {
+  void _showBottomSheet(BuildContext context, String name, String cardNumber, String date, String time, String type, String amount, String phoneNumber) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -215,10 +258,10 @@ class ServiceNumber extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Pagó",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -228,8 +271,8 @@ class ServiceNumber extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "BrianJ AranaZ",
-                    style: TextStyle(
+                    name,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'MarkPro',
@@ -239,10 +282,10 @@ class ServiceNumber extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Cuenta",
                     style: TextStyle(
                       fontSize: 15.0,
@@ -252,8 +295,8 @@ class ServiceNumber extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "5558 •••• •••• ••84",
-                    style: TextStyle(
+                    cardNumber,
+                    style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'MarkPro',
@@ -263,10 +306,10 @@ class ServiceNumber extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Fecha",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -276,8 +319,8 @@ class ServiceNumber extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "17 Abril, 2024",
-                    style: TextStyle(
+                    date,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'MarkPro',
@@ -287,12 +330,12 @@ class ServiceNumber extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "7:08 pm",
-                    style: TextStyle(
+                    time,
+                    style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'MarkPro',
@@ -304,10 +347,10 @@ class ServiceNumber extends StatelessWidget {
               const SizedBox(
                 height: 8.0,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Tipo de Recarga",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -317,8 +360,8 @@ class ServiceNumber extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Tiempo Aire",
-                    style: TextStyle(
+                    type,
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'MarkPro',
@@ -330,10 +373,10 @@ class ServiceNumber extends StatelessWidget {
               const SizedBox(
                 height: 8.0,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Número",
                     style: TextStyle(
                       fontSize: 15.0,
@@ -343,8 +386,8 @@ class ServiceNumber extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "9983983716",
-                    style: TextStyle(
+                    phoneNumber,
+                    style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'MarkPro',
@@ -356,12 +399,12 @@ class ServiceNumber extends StatelessWidget {
               const SizedBox(
                 height: 8.0,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "\$50.00",
-                    style: TextStyle(
+                    "\$${amount.toString()}",
+                    style: const TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'Roboto',
@@ -414,5 +457,16 @@ class ServiceNumber extends StatelessWidget {
         );
       },
     );
+  }
+
+
+  String formatDate(DateTime date) {
+    final DateFormat dateFormatter = DateFormat('dd-MM-yyyy');
+    return dateFormatter.format(date);
+  }
+
+  String formatTime(DateTime date) {
+    final DateFormat timeFormatter = DateFormat('hh:mm a');
+    return timeFormatter.format(date);
   }
 }

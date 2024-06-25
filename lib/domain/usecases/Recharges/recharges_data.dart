@@ -19,7 +19,8 @@ class RechargesData {
       throw Exception('El nombre no puede estar vacío.');
     }
 
-    if (rechargesData.cardNumber.length != 16 || !RegExp(r'^[0-9]+$').hasMatch(rechargesData.cardNumber)) {
+    String cardNumberWithoutSpaces = rechargesData.cardNumber.replaceAll(" ", "");
+    if (cardNumberWithoutSpaces.length != 16 || !RegExp(r'^[0-9]+$').hasMatch(cardNumberWithoutSpaces)) {
       throw Exception('El número de tarjeta debe tener 16 dígitos.');
     }
 
@@ -27,7 +28,7 @@ class RechargesData {
       throw Exception('La fecha no puede ser en el futuro.');
     }
 
-    const validTypes = ['Timepo Aire', 'Plan Prepago', 'Plan Postpago'];
+    const validTypes = ['Tiempo Aire', 'Plan Prepago', 'Plan Postpago'];
     if (!validTypes.contains(rechargesData.type)) {
       throw Exception('El tipo no es válido.');
     }

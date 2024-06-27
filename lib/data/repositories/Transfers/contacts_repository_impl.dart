@@ -8,7 +8,7 @@ class ContactsRepositoryImpl implements ContactRepository {
   @override
   Future<List<ContactModel>> loadContactsData() async {
     final response =
-        await rootBundle.loadString('json_data/Transfers/contacts.json');
+        await rootBundle.loadString('assets/json_data/Transfers/contacts.json');
     final data =
         json.decode(response) as List<dynamic>; // Cast to List<dynamic>
     if (data == null || data.isEmpty) {

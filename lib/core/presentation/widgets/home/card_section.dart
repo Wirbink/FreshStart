@@ -121,6 +121,7 @@ class CardSection extends StatelessWidget {
                             bgColor: colorPanel,
                             fgColor: colorPanel,
                             onTap: () {
+                              print("Go to cash espress");
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

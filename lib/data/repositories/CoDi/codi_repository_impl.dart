@@ -8,11 +8,13 @@ class CodiRepositoryImpl implements CodiRepository {
   @override
   Future<CodiModel> loadCodiData() async {
     try {
-      final response = await rootBundle.loadString('json_data/CoDi/codi.json');
+      final response =
+          await rootBundle.loadString('assets/json_data/CoDi/codi.json');
     } on Exception catch (e) {
       print("aaaaaaaaaa $e");
     }
-    final response = await rootBundle.loadString('json_data/CoDi/codi.json');
+    final response =
+        await rootBundle.loadString('assets/json_data/CoDi/codi.json');
     final data = json.decode(response);
     print(data);
     return CodiModel.fromJson(data);

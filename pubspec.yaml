@@ -75,6 +75,13 @@ flutter:
     - assets/json_data/
     - assets/json_data/CashExpress/cash_express.json
     - assets/json_data/Transfers/contacts.json
+    - assets/json_data/Transfers/international_transfers.json
+    - assets/json_data/Transfers/statement_account.json
+    - assets/json_data/Transfers/transfers.json
+    - assets/json_data/Recharges/recharges.json
+    - assets/json_data/PaymentServices/payment_services.json
+    - assets/json_data/CoDi/codi.json
+    - assets/json_data/Auth/login.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,15 +1,18 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:dio/dio.dart';
 import 'package:fresh_start/domain/models/Auth/register_model.dart';
 import 'package:fresh_start/domain/repositories/Auth/register_repository.dart';
 
 class RegisterRepositoryImpl implements RegisterRepository {
+  final Dio _dio = Dio();
+
   @override
-  Future<RegisterModel> loadRegisterData() async {
-    final response = await rootBundle.loadString('assets/json_data/Auth/register.data');
-    final data = json.decode(response);
-    print(data);
-    return RegisterModel.fromJson(data);
+  Future<dynamic> submitUser(RegisterModel register) async {
+    try {
+      final response = await _dio.post('TODO: url', data: register.toJson());
+      return response;
+    } catch (e) {
+      print(e);
+      throw Exception('Failed to submit Register');
+    }
   }
 }

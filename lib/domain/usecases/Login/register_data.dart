@@ -6,8 +6,8 @@ class RegisterData {
 
   RegisterData(this.repository);
 
-  Future<RegisterModel> call() async {
-    final registerData = await repository.loadRegisterData();
+  Future<void> call(RegisterModel register) async {
+    final registerData = await repository.submitUser(register);
 
     
     if (registerData.name.isEmpty) {

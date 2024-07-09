@@ -21,6 +21,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final LocalAuthentication _localAuthentication = LocalAuthentication();
 
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   Future<void> _auth() async {
     bool authenticated = false;
     try {
@@ -50,111 +53,132 @@ class _LoginPageState extends State<LoginPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return BlocProvider(
-        create: (context) => LoginBloc(
-              LoginData(LoginRepositoryImpl()),
-            )..add(LoadLoginDataEvent()),
-        child: Scaffold(
-          body: SingleChildScrollView(
-            child: Container(
-              height: screenHeight,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/LoginFreshBank.png'),
-                    fit: BoxFit.cover),
-              ),
-              child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(height: screenHeight * 0.3),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: screenWidth * 0.1, vertical: 20.0),
-                      padding: const EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: colorPanel,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          BlocBuilder<LoginBloc, LoginState>(
-                            builder: (context, state) {
-                              TextEditingController emailController =
-                                  TextEditingController(text: state.email);
-                              TextEditingController passwordController =
-                                  TextEditingController(text: state.password);
-                              return Column(
-                                children: [
-                                  TextField(
-                                    controller: emailController,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Correo',
-                                      suffixIcon: Icon(Icons.email),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  TextField(
-                                    controller: passwordController,
-                                    obscureText: true,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Contraseña',
-                                      suffixIcon: Icon(Icons.visibility_off),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 30.0),
-                          Center(
-                            child: Column(
+    final loginRepository = LoginRepositoryImpl();
+    final loginData = LoginData(loginRepository);
+
+    return Scaffold(
+        body: BlocProvider(
+      create: (context) => LoginBloc(loginData),
+      child: SingleChildScrollView(
+        child: Container(
+          height: screenHeight,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/LoginFreshBank.png'),
+                fit: BoxFit.cover),
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(height: screenHeight * 0.3),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.1, vertical: 20.0),
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: colorPanel,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BlocBuilder<LoginBloc, LoginState>(
+                        builder: (context, state) {
+                          if (state is LoginInitial) {
+                            return buildForm(context);
+                          } else if (state is LoginLoading) {
+                            return const CircularProgressIndicator();
+                          } else if (state is LoginSuccess) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeView()));
+                            return const Text('Sucess');
+                          } else if (state is LoginError) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    '¿Olvidaste tu contraseña?',
-                                    style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: colorPrimaryComplementary,
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: _auth,
-                                  child: const GeneralButtonWidget(
-                                      text: 'Iniciar Sesión'),
-                                ),
-                                const SizedBox(height: 35.0),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                RegisterView()));
-                                  },
-                                  child: const GeneralButtonWidget(
-                                      text: 'Registrarse'),
-                                ),
-                                const Text("O"),
-                                IconButton(
-                                  onPressed: _auth,
-                                  icon: const Icon(Icons.fingerprint),
-                                ),
+                                Text(state.message),
+                                const SizedBox(height: 16),
+                                buildForm(context),
                               ],
-                            ),
-                          ),
-                        ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 30.0),
+                      Center(
+                        child: Column(
+                          children: [
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                '¿Olvidaste tu contraseña?',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: colorPrimaryComplementary,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: _auth,
+                              child: const GeneralButtonWidget(
+                                  text: 'Iniciar Sesión'),
+                            ),
+                            const SizedBox(height: 35.0),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => RegisterView()));
+                              },
+                              child: const GeneralButtonWidget(
+                                  text: 'Registrarse'),
+                            ),
+                            const Text("O"),
+                            IconButton(
+                              onPressed: _auth,
+                              icon: const Icon(Icons.fingerprint),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    ));
+  }
+
+  Widget buildForm(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: emailController,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Correo',
+            suffixIcon: Icon(Icons.email),
+          ),
+        ),
+        const SizedBox(height: 20.0),
+        TextField(
+          controller: passwordController,
+          obscureText: true,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Contraseña',
+            suffixIcon: Icon(Icons.visibility_off),
+          ),
+        ),
+      ],
+    );
   }
 }

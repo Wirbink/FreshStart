@@ -6,25 +6,25 @@ class LoginData {
 
   LoginData(this.repository);
 
-  Future<LoginModel> call() async {
-    final loginData = await repository.loadLoginData();
+  Future<void> call(LoginModel login) async {
+    final loginData = await repository.loginUser(login);
     
-    final emailRgx = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    // final emailRgx = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
 
-    if (loginData.email.isEmpty){
-      throw Exception("Email is Empty");
+    // if (loginData.email.isEmpty){
+    //   throw Exception("Email is Empty");
 
-    }
+    // }
 
-    if(!emailRgx.hasMatch(loginData.email))
-    {
-      throw Exception("No tiene formato de correo");
-    }
+    // if(!emailRgx.hasMatch(loginData.email))
+    // {
+    //   throw Exception("No tiene formato de correo");
+    // }
 
-    if (loginData.password.isEmpty){
-      throw Exception("Password is empty");
-    }
+    // if (loginData.password.isEmpty){
+    //   throw Exception("Password is empty");
+    // }
 
     
     return loginData;

@@ -1,83 +1,102 @@
 import 'package:equatable/equatable.dart';
+import 'package:fresh_start/domain/models/Auth/register_model.dart';
 
 abstract class RegisterEvent extends Equatable {
   const RegisterEvent();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-class LoadRegisterDataEvent extends RegisterEvent{}
+class SubmitRegisterEvent extends RegisterEvent {
+  final RegisterModel register;
 
-  class NameChanged extends RegisterEvent{
-    final String name;
+  const SubmitRegisterEvent(this.register);
 
-    const NameChanged(this.name);
+  @override
+  List<Object> get props => [register];
+}
 
-    @override 
-    List<Object> get props => [name];
-  }
+// import 'package:equatable/equatable.dart';
 
-  class LastNameChanged extends RegisterEvent{
-    final String lastname;
+// abstract class RegisterEvent extends Equatable {
+//   const RegisterEvent();
 
-    const LastNameChanged(this.lastname);
+//   @override
+//   List<Object?> get props => [];
+// }
 
-    @override 
-    List<Object> get props => [lastname];
-  }
+// class LoadRegisterDataEvent extends RegisterEvent{}
 
-  class EmailChanged extends RegisterEvent{
-    final String email;
+//   class NameChanged extends RegisterEvent{
+//     final String name;
 
-    const EmailChanged(this.email);
+//     const NameChanged(this.name);
 
-    @override 
-    List<Object> get props => [email];
-  }
+//     @override 
+//     List<Object> get props => [name];
+//   }
 
-  class RfcChanged extends RegisterEvent{
-    final String rfc;
+//   class LastNameChanged extends RegisterEvent{
+//     final String lastname;
 
-    const RfcChanged(this.rfc);
+//     const LastNameChanged(this.lastname);
 
-    @override 
-    List<Object> get props => [rfc];
-  }
+//     @override 
+//     List<Object> get props => [lastname];
+//   }
 
-   class PhoneChanged extends RegisterEvent{
-    final String phone;
+//   class EmailChanged extends RegisterEvent{
+//     final String email;
 
-    const PhoneChanged(this.phone);
+//     const EmailChanged(this.email);
 
-    @override 
-    List<Object> get props => [phone];
-  }
+//     @override 
+//     List<Object> get props => [email];
+//   }
 
-  class PasswordChanged extends RegisterEvent{
-    final String password;
+//   class RfcChanged extends RegisterEvent{
+//     final String rfc;
 
-    const PasswordChanged(this.password);
+//     const RfcChanged(this.rfc);
 
-    @override 
-    List<Object> get props => [password];
-  }
+//     @override 
+//     List<Object> get props => [rfc];
+//   }
 
-  class CountryChanged extends RegisterEvent{
-      final String country;
+//    class PhoneChanged extends RegisterEvent{
+//     final String phone;
 
-      const CountryChanged(this.country);
+//     const PhoneChanged(this.phone);
 
-      @override 
-      List<Object> get props => [country];
-  }
-  class AcceptedTermsChanged extends RegisterEvent{
-    final bool acceptedTerms;
+//     @override 
+//     List<Object> get props => [phone];
+//   }
 
-    const AcceptedTermsChanged(this.acceptedTerms);
+//   class PasswordChanged extends RegisterEvent{
+//     final String password;
 
-    @override 
-    List<Object> get props => [acceptedTerms];
-  }
+//     const PasswordChanged(this.password);
 
-  class RegisterSubmitted extends RegisterEvent {}
+//     @override 
+//     List<Object> get props => [password];
+//   }
+
+//   class CountryChanged extends RegisterEvent{
+//       final String country;
+
+//       const CountryChanged(this.country);
+
+//       @override 
+//       List<Object> get props => [country];
+//   }
+//   class AcceptedTermsChanged extends RegisterEvent{
+//     final bool acceptedTerms;
+
+//     const AcceptedTermsChanged(this.acceptedTerms);
+
+//     @override 
+//     List<Object> get props => [acceptedTerms];
+//   }
+
+//   class RegisterSubmitted extends RegisterEvent {}

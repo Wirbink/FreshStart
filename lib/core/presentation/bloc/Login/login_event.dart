@@ -1,39 +1,58 @@
 import 'package:equatable/equatable.dart';
+import 'package:fresh_start/domain/models/Auth/login_model.dart';
 
 abstract class LoginEvent extends Equatable {
   const LoginEvent();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-class LoadLoginDataEvent extends LoginEvent {}
+class SubmitLoginEvent extends LoginEvent {
+  final LoginModel login;
 
-class EmailChanged extends LoginEvent {
-  final String email;
-
-  const EmailChanged(this.email);
+  const SubmitLoginEvent(this.login);
 
   @override
-  List<Object> get props => [email];
+  List<Object> get props => [login];
 }
 
-class PasswordChanged extends LoginEvent {
-  final String password;
+// import 'package:equatable/equatable.dart';
 
-  const PasswordChanged(this.password);
+// abstract class LoginEvent extends Equatable {
+//   const LoginEvent();
 
-  @override
-  List<Object> get props => [password];
-}
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class RememberChanged extends LoginEvent {
-  final bool remember;
+// class LoadLoginDataEvent extends LoginEvent {}
 
-  const RememberChanged(this.remember);
+// class EmailChanged extends LoginEvent {
+//   final String email;
 
-  @override
-  List<Object> get props => [remember];
-}
+//   const EmailChanged(this.email);
 
-class LoginSubmitted extends LoginEvent {}
+//   @override
+//   List<Object> get props => [email];
+// }
+
+// class PasswordChanged extends LoginEvent {
+//   final String password;
+
+//   const PasswordChanged(this.password);
+
+//   @override
+//   List<Object> get props => [password];
+// }
+
+// class RememberChanged extends LoginEvent {
+//   final bool remember;
+
+//   const RememberChanged(this.remember);
+
+//   @override
+//   List<Object> get props => [remember];
+// }
+
+// class LoginSubmitted extends LoginEvent {}

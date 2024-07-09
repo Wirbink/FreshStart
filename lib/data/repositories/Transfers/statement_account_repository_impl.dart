@@ -7,7 +7,8 @@ import 'package:fresh_start/domain/repositories/Transfers/statement_repository.d
 class StatementRepositoryImpl implements StatementRepository {
   @override
   Future<StatementAccountModel> loadStatementAccountData() async {
-    final response = await rootBundle.loadString('json_data/Transfers/statement_account.json');
+    final response = await rootBundle
+        .loadString('assets/json_data/Transfers/statement_account.json');
     final data = json.decode(response);
     print(data);
     return StatementAccountModel.fromJson(data);

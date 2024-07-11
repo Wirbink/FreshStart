@@ -4,6 +4,7 @@ import 'package:fresh_start/styles.dart';
 import 'package:intl/intl.dart';
 
 class StatusWidget extends StatelessWidget {
+  final int idTransaction;
   final String clabe;
   final String cardNumber;
   final double spent;
@@ -13,6 +14,7 @@ class StatusWidget extends StatelessWidget {
 
   const StatusWidget({
     super.key,
+    required this.idTransaction,
     required this.clabe,
     required this.cardNumber,
     required this.spent,
@@ -32,11 +34,7 @@ class StatusWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => EstadoDeCuentaWidget(
-                spent: spent,
-                date: date,
-                bill: bill,
-                voucher: voucher,
-                cardNumber: cardNumber,
+                idTransaction: idTransaction,
               ),
             ),
           );

@@ -8,42 +8,54 @@ abstract class StatementAccountEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadStatementAccountDataEvent extends StatementAccountEvent {}
-
-class ClabeAccountChanged extends StatementAccountEvent {
-  final String clabeAccount;
-
-  const ClabeAccountChanged(this.clabeAccount);
-
+class GetStatementAccountEvent extends StatementAccountEvent {
   @override
-  List<Object> get props => [clabeAccount];
+  List<Object> get props => [];
 }
 
-class CardNumberAccountChanged extends StatementAccountEvent {
-  final String cardNumberAccount;
+// abstract class StatementAccountEvent extends Equatable {
+//   const StatementAccountEvent();
 
-  const CardNumberAccountChanged(this.cardNumberAccount);
+//   @override
+//   List<Object> get props => [];
+// }
 
-  @override
-  List<Object> get props => [cardNumberAccount];
-}
+// class LoadStatementAccountDataEvent extends StatementAccountEvent {}
 
-class AmountAccountChanged extends StatementAccountEvent {
-  final double amountAccount;
+// class ClabeAccountChanged extends StatementAccountEvent {
+//   final String clabeAccount;
 
-  const AmountAccountChanged(this.amountAccount);
+//   const ClabeAccountChanged(this.clabeAccount);
 
-  @override
-  List<Object> get props => [amountAccount];
-}
+//   @override
+//   List<Object> get props => [clabeAccount];
+// }
 
-class ContactsChanged extends StatementAccountEvent {
-  final List<ContactModel> contacts;
+// class CardNumberAccountChanged extends StatementAccountEvent {
+//   final String cardNumberAccount;
 
-  const ContactsChanged(this.contacts);
+//   const CardNumberAccountChanged(this.cardNumberAccount);
 
-  @override
-  List<Object> get props => [contacts];
-}
+//   @override
+//   List<Object> get props => [cardNumberAccount];
+// }
 
-class StatementAccountSubmitted extends StatementAccountEvent {}
+// class AmountAccountChanged extends StatementAccountEvent {
+//   final double amountAccount;
+
+//   const AmountAccountChanged(this.amountAccount);
+
+//   @override
+//   List<Object> get props => [amountAccount];
+// }
+
+// class ContactsChanged extends StatementAccountEvent {
+//   final List<ContactModel> contacts;
+
+//   const ContactsChanged(this.contacts);
+
+//   @override
+//   List<Object> get props => [contacts];
+// }
+
+// class StatementAccountSubmitted extends StatementAccountEvent {}

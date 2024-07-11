@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:fresh_start/domain/models/Auth/login_model.dart';
 import 'package:fresh_start/domain/repositories/Auth/login_repository.dart';
@@ -27,15 +26,4 @@ class LoginRepositoryImpl implements LoginRepository {
     await prefs.setString('auth_token', token);
   }
 
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('auth_token');
-  }
-
-  // Future<LoginModel> loadLoginData() async {
-  //   final response = await rootBundle.loadString('assets/json_data/Auth/login.json');
-  //   final data = json.decode(response);
-  //   print(data);
-  //   return LoginModel.fromJson(data);
-  // }
 }

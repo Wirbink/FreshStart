@@ -8,7 +8,7 @@ class RegisterData {
 
   Future<void> call(RegisterModel register) async {
     final registerData = await repository.submitUser(register);
-    
+    // status success fail error
     // if (registerData.name.isEmpty) {
     //   throw Exception("Name cannot be empty");
     // }

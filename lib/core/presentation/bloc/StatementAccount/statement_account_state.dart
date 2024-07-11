@@ -1,42 +1,34 @@
 import 'package:equatable/equatable.dart';
 import 'package:fresh_start/domain/models/Transfers/contact_model.dart';
 import 'package:fresh_start/domain/models/Transfers/statement_account_model.dart';
-
-class StatementAccountState extends Equatable {
-  final String clabeAccount;
-  final String cardNumberAccount;
-  final double amountAccount;
-  final List<ContactModel> contacts;
-
-  const StatementAccountState(
-      {this.clabeAccount = '',
-      this.cardNumberAccount = '',
-      this.amountAccount = 0.0,
-      this.contacts = const []});
-
-  factory StatementAccountState.fromModel(
-      StatementAccountModel model, List<ContactModel> contacts) {
-    return StatementAccountState(
-        clabeAccount: model.clabeAccount,
-        cardNumberAccount: model.cardNumberAccount,
-        amountAccount: model.amountAccount,
-        contacts: contacts);
-  }
-
-  StatementAccountState copyWith(
-      {String? clabeAccount,
-      String? cardNumberAccount,
-      double? amountAccount,
-      List<ContactModel>? contacts,
-      bool? isValid}) {
-    return StatementAccountState(
-        clabeAccount: clabeAccount ?? this.clabeAccount,
-        cardNumberAccount: cardNumberAccount ?? this.cardNumberAccount,
-        amountAccount: amountAccount ?? this.amountAccount,
-        contacts: contacts ?? this.contacts
-        );
-  }
+import 'package:fresh_start/domain/models/Transfers/transfers_registration.dart';
+abstract class StatementAccountState extends Equatable {
+  const StatementAccountState();
 
   @override
-  List<Object> get props => [clabeAccount, cardNumberAccount, amountAccount, contacts];
+  List<Object> get props => [];
 }
+
+class Empty extends StatementAccountState {}
+
+class Loading extends StatementAccountState {}
+
+class Success extends StatementAccountState {
+  final List<TransfersRegistrationModel> transactions;
+  final StatementAccountModel statement;
+
+  const Success(this.transactions, this.statement);
+
+  @override
+  List<Object> get props => [transactions, statement];
+}
+
+class Error extends StatementAccountState {
+  final String message;
+
+  const Error({required this.message});
+
+  @override 
+  List<Object> get props => [message];
+}
+

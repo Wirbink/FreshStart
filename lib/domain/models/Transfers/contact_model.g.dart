@@ -24,5 +24,5 @@ Map<String, dynamic> _$ContactModelToJson(ContactModel instance) =>
       'date': instance.date.toIso8601String(),
       'bill': instance.bill,
       'voucher': instance.voucher,
-      'name': instance.name
+      'name': instance.name,
     };

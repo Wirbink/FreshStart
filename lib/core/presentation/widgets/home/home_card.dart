@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fresh_start/core/presentation/views/estado_cuenta_view.dart';
-import 'package:fresh_start/core/presentation/views/estado_cuenta_view2.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:intl/intl.dart';
 
@@ -30,18 +28,18 @@ class HomeCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EstadoDeCuentaWidget(
-              spent: spent,
-              date: date,
-              bill: bill,
-              voucher: voucher,
-              cardNumber: cardNumber,
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => EstadoDeCuentaWidget(
+        //       spent: spent,
+        //       date: date,
+        //       bill: bill,
+        //       voucher: voucher,
+        //       cardNumber: cardNumber,
+        //     ),
+        //   ),
+        // );
       },
       child: Container(
         margin: const EdgeInsets.only(top: 10.0, bottom: 7.5),

@@ -70,6 +70,7 @@ class _RegisterViewState extends State<RegisterView> {
                             return const Text(
                                 'Register data submitted successfully');
                           } else if (state is RegisterError) {
+                            print("Hola entre al error");
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -82,36 +83,6 @@ class _RegisterViewState extends State<RegisterView> {
                             return Container();
                           }
                         },
-                      ),
-                      const SizedBox(height: 24.0),
-                      Center(
-                        child: GestureDetector(
-                          child: GeneralButtonWidget(
-                            text: "Registrarse",
-                            onPressed: () {
-                              final user = RegisterModel(
-                                name: nameController.text,
-                                lastname: lastnameController.text,
-                                email: emailController.text,
-                                rfc: rfcController.text,
-                                phone: phoneController.text,
-                                password: passwordController.text,
-                                idBank: 1,
-                              );
-                              BlocProvider.of<RegisterBloc>(context)
-                                  .add(SubmitRegisterEvent(user));
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8.0),
-                      DividerWidget(),
-                      const SizedBox(height: 8.0),
-                      Center(
-                        child: GestureDetector(
-                          child:
-                              const GeneralButtonWidget(text: "Iniciar Sesión"),
-                        ),
                       ),
                     ],
                   ),
@@ -195,6 +166,35 @@ class _RegisterViewState extends State<RegisterView> {
               fontFamily: 'MarkPro',
               fontWeight: FontWeight.bold,
               fontSize: 20.0),
+        ),
+        const SizedBox(height: 24.0),
+        Center(
+          child: GestureDetector(
+            child: GeneralButtonWidget(
+              text: "Registrarse",
+              onPressed: () {
+                final user = RegisterModel(
+                  name: nameController.text,
+                  lastname: lastnameController.text,
+                  email: emailController.text,
+                  rfc: rfcController.text,
+                  phone: phoneController.text,
+                  password: passwordController.text,
+                  id_bank: 6,
+                );
+                BlocProvider.of<RegisterBloc>(context)
+                    .add(SubmitRegisterEvent(user));
+              },
+            ),
+          ),
+        ),
+        const SizedBox(height: 8.0),
+        DividerWidget(),
+        const SizedBox(height: 8.0),
+        Center(
+          child: GestureDetector(
+            child: const GeneralButtonWidget(text: "Iniciar Sesión"),
+          ),
         ),
       ],
     );

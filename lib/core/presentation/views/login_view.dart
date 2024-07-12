@@ -7,6 +7,7 @@ import 'package:fresh_start/core/presentation/views/home_view.dart';
 import 'package:fresh_start/core/presentation/views/register_view.dart';
 import 'package:fresh_start/core/presentation/widgets/general_button.dart';
 import 'package:fresh_start/data/repositories/Auth/login_repository_impl.dart';
+import 'package:fresh_start/domain/models/Auth/login_model.dart';
 import 'package:fresh_start/domain/usecases/Login/login_data.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:local_auth/local_auth.dart';
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
         body: BlocProvider(
-      create: (context) => LoginBloc(loginData),
+      create: (context) => LoginBloc(loginData, context),
       child: SingleChildScrollView(
         child: Container(
           height: screenHeight,
@@ -89,10 +90,6 @@ class _LoginPageState extends State<LoginPage> {
                           } else if (state is LoginLoading) {
                             return const CircularProgressIndicator();
                           } else if (state is LoginSuccess) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeView()));
                             return const Text('Sucess');
                           } else if (state is LoginError) {
                             return Column(
@@ -107,45 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                             return Container();
                           }
                         },
-                      ),
-                      const SizedBox(height: 30.0),
-                      Center(
-                        child: Column(
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                '¿Olvidaste tu contraseña?',
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: colorPrimaryComplementary,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: _auth,
-                              child: const GeneralButtonWidget(
-                                  text: 'Iniciar Sesión'),
-                            ),
-                            const SizedBox(height: 35.0),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => RegisterView()));
-                              },
-                              child: const GeneralButtonWidget(
-                                  text: 'Registrarse'),
-                            ),
-                            const Text("O"),
-                            IconButton(
-                              onPressed: _auth,
-                              icon: const Icon(Icons.fingerprint),
-                            ),
-                          ],
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -176,6 +135,47 @@ class _LoginPageState extends State<LoginPage> {
             border: OutlineInputBorder(),
             labelText: 'Contraseña',
             suffixIcon: Icon(Icons.visibility_off),
+          ),
+        ),
+        const SizedBox(height: 30.0),
+        Center(
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  '¿Olvidaste tu contraseña?',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: colorPrimaryComplementary,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  final user = LoginModel(
+                  phone: emailController.text,
+                  password: passwordController.text
+                );
+                BlocProvider.of<LoginBloc>(context)
+                    .add(SubmitLoginEvent(user));
+                },
+                child: const GeneralButtonWidget(text: 'Iniciar Sesión'),
+              ),
+              const SizedBox(height: 35.0),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => RegisterView()));
+                },
+                child: const GeneralButtonWidget(text: 'Registrarse'),
+              ),
+              const Text("O"),
+              IconButton(
+                onPressed: _auth,
+                icon: const Icon(Icons.fingerprint),
+              ),
+            ],
           ),
         ),
       ],

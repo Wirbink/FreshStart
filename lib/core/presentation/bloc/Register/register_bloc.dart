@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/Register/register_event.dart';
 import 'package:fresh_start/core/presentation/bloc/Register/register_state.dart';
-import 'package:fresh_start/domain/usecases/Login/register_data.dart';
+import 'package:fresh_start/domain/usecases/Auth/register_data.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final RegisterData submitRegister;

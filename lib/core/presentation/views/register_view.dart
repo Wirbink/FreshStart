@@ -9,7 +9,7 @@ import 'package:fresh_start/core/presentation/widgets/general_button.dart';
 import 'package:fresh_start/core/presentation/widgets/input_text.dart';
 import 'package:fresh_start/data/repositories/Auth/register_repository_impl.dart';
 import 'package:fresh_start/domain/models/Auth/register_model.dart';
-import 'package:fresh_start/domain/usecases/Login/register_data.dart';
+import 'package:fresh_start/domain/usecases/Auth/register_data.dart';
 import 'package:fresh_start/styles.dart';
 
 class RegisterView extends StatefulWidget {

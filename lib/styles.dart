@@ -13,6 +13,7 @@ const Color colorDisabled = Color(0xFFC7CDD6);
 const Color colorDisabledText = Color(0xFF9B9B9B);
 const Color colorNumberText = Color(0xFF808080);
 
+
 class TextMarkProRegular extends StatelessWidget {
   final String text;
   final Color color;

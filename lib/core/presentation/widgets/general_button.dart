@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class GeneralButtonWidget extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
+  final bool enabled;
 
   const GeneralButtonWidget({
     Key? key,
     required this.text,
     this.onPressed,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -17,10 +19,10 @@ class GeneralButtonWidget extends StatelessWidget {
       child: SizedBox(
         height: 55.0,
         child: ElevatedButton(
-          onPressed: onPressed,
+          onPressed: enabled ? onPressed : null,
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
-            backgroundColor: const Color(0xFF1A2D4D),
+            backgroundColor: enabled ? const Color(0xFF1A2D4D) : Colors.grey,
             elevation: 0,
             textStyle: const TextStyle(
                 fontSize: 18.0,

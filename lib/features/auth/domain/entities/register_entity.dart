@@ -1,9 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'register_model.g.dart';
-
-@JsonSerializable()
-class RegisterModel {
+class RegisterEntity {
   String name;
   String lastname;
   String email;
@@ -12,7 +7,7 @@ class RegisterModel {
   String password;
   int id_bank;
 
-  RegisterModel(
+  RegisterEntity(
       {required this.name,
       required this.lastname,
       required this.email,
@@ -20,9 +15,4 @@ class RegisterModel {
       required this.phone,
       required this.password,
       required this.id_bank});
-
-  factory RegisterModel.fromJson(Map<String, dynamic> json) =>
-      _$RegisterModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
 }

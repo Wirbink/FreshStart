@@ -106,14 +106,16 @@ class HomeCard extends StatelessWidget {
                 ),
               ],
             ),
-            const Spacer(),
+            const SizedBox(
+              width: 4.0,
+            ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "\$ $spent",
+                    "\$$spent",
                     style: const TextStyle(
                       fontFamily: 'MarkPro',
                       fontSize: 20.0,
@@ -128,14 +130,14 @@ class HomeCard extends StatelessWidget {
                             formattedDate,
                             style: const TextStyle(
                               fontFamily: 'MarkPro',
-                              fontSize: 12,
+                              fontSize: 8.0,
                               color: colorTertearyText,
                             ),
                           )
                         ],
                       ),
                       const SizedBox(
-                        width: 10.0,
+                        width: 8.0,
                       ),
                       Column(
                         children: [
@@ -143,7 +145,7 @@ class HomeCard extends StatelessWidget {
                             formattedTime,
                             style: const TextStyle(
                               fontFamily: 'MarkPro',
-                              fontSize: 12,
+                              fontSize: 8.0,
                               color: colorTertearyText,
                             ),
                           )

@@ -29,14 +29,14 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
                   TextRobotoBold(
                     text: initials,
                     color: Colors.white,
-                    size: 30,
+                    size: 25,
                   ),
                 ],
               ),
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(left: 15.0),
+            padding: const EdgeInsets.only(left: 12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -46,7 +46,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 TextMarkProBold(
                   text: username,
-                  size: 25,
+                  size: 20,
                 ),
               ],
             ),

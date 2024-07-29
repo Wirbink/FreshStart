@@ -67,7 +67,7 @@ class _CashExpressState extends State<CashExpressView> {
                                       fontFamily: 'Roboto'),
                                 ),
                                 const SizedBox(
-                                  width: 60.0,
+                                  width: 30.0,
                                 ),
                                 SvgPicture.asset(
                                   'assets/images/mc_symbol.svg',

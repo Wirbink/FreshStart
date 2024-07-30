@@ -16,6 +16,10 @@ class UnauthorizedFailure extends Failure {
   String get message => 'Unauthorized: $additionalMessage';
 }
 
+class UserCreationFailure extends Failure {
+  @override
+  String get message => 'User Creation Failure: Please try again later.';
+}
 
 class ServerFailure extends Failure {
   @override

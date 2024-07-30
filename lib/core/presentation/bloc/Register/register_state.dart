@@ -16,7 +16,7 @@ class RegisterSuccess extends RegisterState {}
 class RegisterError extends RegisterState {
   final String message;
 
-  const RegisterError(this.message);
+  const RegisterError({required this.message});
 
   @override 
   List<Object> get props => [message];

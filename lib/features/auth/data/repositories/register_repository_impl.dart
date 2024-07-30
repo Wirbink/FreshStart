@@ -27,6 +27,9 @@ class RegisterRepositoryImpl implements RegisterRepository {
         final response = await dio.post('/users', data: register.toJson());
 
         if (response.statusCode != 201) {
+          if (response.data['errors'] != null) {
+            return Left(ValidationFailure(response.data['errors']));
+          }
           return Left(UserCreationFailure());
         }
 

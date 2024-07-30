@@ -16,6 +16,18 @@ class UnauthorizedFailure extends Failure {
   String get message => 'Unauthorized: $additionalMessage';
 }
 
+class ValidationFailure extends Failure {
+  final List<dynamic> errors;
+
+  ValidationFailure(this.errors);
+
+  @override
+  List<Object> get props => [errors];
+
+  List get errorMessages => errors.map((e) => e['constraints'].values.join(', ')).toList();
+}
+
+
 class UserCreationFailure extends Failure {
   @override
   String get message => 'User Creation Failure: Please try again later.';

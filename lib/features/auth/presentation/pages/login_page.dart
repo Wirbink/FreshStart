@@ -5,11 +5,15 @@ import 'package:fresh_start/core/presentation/views/home_view.dart';
 import 'package:fresh_start/core/presentation/views/register_view.dart';
 import 'package:fresh_start/core/presentation/widgets/general_button.dart';
 import 'package:fresh_start/core/services/shared_preferences_service.dart';
+import 'package:fresh_start/core/utils/snackbar_utils.dart';
+import 'package:fresh_start/core/utils/string_utils.dart';
 import 'package:fresh_start/core/utils/validators.dart';
 import 'package:fresh_start/features/auth/data/models/login_model.dart';
 import 'package:fresh_start/features/auth/data/repositories/login_repository_impl.dart';
 import 'package:fresh_start/features/auth/domain/usecases/login_usecase.dart';
 import 'package:fresh_start/features/auth/presentation/blocs/login_bloc/login_bloc.dart';
+import 'package:fresh_start/features/auth/presentation/pages/register_page.dart';
+import 'package:fresh_start/features/auth/presentation/widgets/password_field.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -48,7 +52,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final sharedPreferencesService = SharedPreferencesService();
     final connectivity = Connectivity();
-    final loginRepository = LoginRepositoryImpl(sharedPreferencesService: sharedPreferencesService, connectivity: connectivity);
+    final loginRepository = LoginRepositoryImpl(
+        sharedPreferencesService: sharedPreferencesService,
+        connectivity: connectivity);
     final loginUser = LoginUseCase(loginRepository);
     final loginBloc = LoginBloc(loginUser: loginUser);
 
@@ -58,9 +64,8 @@ class _LoginPageState extends State<LoginPage> {
           child: BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
               if (state is LoginError) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.message)),
-                );
+                showCustomSnackBar(
+                    context, capitalizeFirstLetter(state.message));
               } else if (state is LoginSuccess) {
                 Navigator.pushReplacement(
                     context,
@@ -70,18 +75,14 @@ class _LoginPageState extends State<LoginPage> {
             },
             child: BlocBuilder<LoginBloc, LoginState>(
               builder: (context, state) {
-                if (state is LoginLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-
-                return buildLogin(context);
+                return buildLogin(context, state);
               },
             ),
           )),
     );
   }
 
-  Widget buildLogin(BuildContext context) {
+  Widget buildLogin(BuildContext context, LoginState state) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -115,20 +116,15 @@ class _LoginPageState extends State<LoginPage> {
                           controller: phoneController,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Correo',
-                            suffixIcon: Icon(Icons.email),
+                            labelText: 'Número de telefono',
+                            suffixIcon: Icon(Icons.phone),
                           ),
                           validator: Validators.phoneNumber,
                         ),
                         const SizedBox(height: 20.0),
-                        TextFormField(
+                        PasswordField(
+                          validator: Validators.validatePassword,
                           controller: passwordController,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Contraseña',
-                            suffixIcon: Icon(Icons.visibility_off),
-                          ),
                         ),
                         const SizedBox(height: 30.0),
                         Center(
@@ -155,7 +151,8 @@ class _LoginPageState extends State<LoginPage> {
                                         .add(SubmitLoginEvent(login: user));
                                   }
                                 },
-                                enabled: isButtonEnabled,
+                                isEnabled: isButtonEnabled,
+                                isLoading: state is LoginLoading,
                               ),
                               const SizedBox(height: 35.0),
                               GeneralButtonWidget(
@@ -165,9 +162,9 @@ class _LoginPageState extends State<LoginPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              RegisterView()));
+                                              const RegisterPage()));
                                 },
-                                enabled: true,
+                                isEnabled: true,
                               ),
                               const Text("O"),
                               IconButton(

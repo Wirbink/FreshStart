@@ -61,7 +61,7 @@ class CodiRegisterView extends StatelessWidget {
                                         fontFamily: 'Roboto'),
                                   ),
                                   const SizedBox(
-                                    width: 60.0,
+                                    width: 30.0,
                                   ),
                                   SvgPicture.asset(
                                     'assets/images/mc_symbol.svg',

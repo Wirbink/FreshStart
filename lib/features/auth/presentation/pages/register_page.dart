@@ -1,9 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fresh_start/core/presentation/widgets/divider_widget.dart';
-import 'package:fresh_start/core/presentation/widgets/general_button.dart';
-import 'package:fresh_start/core/presentation/widgets/input_text.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/divider_widget.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
 import 'package:fresh_start/core/services/shared_preferences_service.dart';
 import 'package:fresh_start/core/utils/snackbar_utils.dart';
 import 'package:fresh_start/core/utils/string_utils.dart';

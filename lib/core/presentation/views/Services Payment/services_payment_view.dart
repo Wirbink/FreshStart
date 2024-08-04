@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
-import 'package:fresh_start/core/presentation/widgets/general_button.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
 
 class ServicePaymentView extends StatelessWidget {
   const ServicePaymentView({super.key});

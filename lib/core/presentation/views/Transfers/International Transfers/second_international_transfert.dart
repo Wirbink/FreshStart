@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/TransfersInternational/transfers_international_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/TransfersInternational/transfers_international_event.dart';
 import 'package:fresh_start/core/presentation/bloc/TransfersInternational/transfers_international_state.dart';
-import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
-import 'package:fresh_start/core/presentation/widgets/general_button.dart';
-import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/subtitle.dart';
 import 'package:fresh_start/data/repositories/Transfers/transfers_international_repository_impl.dart';
 import 'package:fresh_start/domain/usecases/Transfers/transfers_international_data.dart';
 import 'package:fresh_start/styles.dart';
-import 'package:fresh_start/core/presentation/widgets/container_dropdown.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/container_dropdown.dart';
 
 String? selectedBank;
 String? selectedAmount;

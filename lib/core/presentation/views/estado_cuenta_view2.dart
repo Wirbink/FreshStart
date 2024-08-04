@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/StatementAccount/specific_transfer_detail_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/StatementAccount/specific_transfer_detail_state.dart';
-import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
-import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
-// ignore: unused_import
-import 'package:fresh_start/data/repositories/Transfers/statement_account_repository_impl.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/subtitle.dart';
 import 'package:fresh_start/data/repositories/Transfers/transfers_registration_repository_impl.dart';
 import 'package:fresh_start/domain/models/Transfers/transfers_registration.dart';
 import 'package:fresh_start/domain/usecases/Transfers/specific_transfer_detail_data.dart';

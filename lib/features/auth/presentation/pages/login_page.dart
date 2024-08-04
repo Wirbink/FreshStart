@@ -2,8 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/views/home_view.dart';
-import 'package:fresh_start/core/presentation/views/register_view.dart';
-import 'package:fresh_start/core/presentation/widgets/general_button.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
 import 'package:fresh_start/core/services/shared_preferences_service.dart';
 import 'package:fresh_start/core/utils/snackbar_utils.dart';
 import 'package:fresh_start/core/utils/string_utils.dart';
@@ -14,6 +13,7 @@ import 'package:fresh_start/features/auth/domain/usecases/login_usecase.dart';
 import 'package:fresh_start/features/auth/presentation/blocs/login_bloc/login_bloc.dart';
 import 'package:fresh_start/features/auth/presentation/pages/register_page.dart';
 import 'package:fresh_start/features/auth/presentation/widgets/password_field.dart';
+import 'package:fresh_start/features/home/presentation/pages/home_page.dart';
 import 'package:fresh_start/styles.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute<void>(
-                        builder: (context) => const HomeView()));
+                        builder: (context) => const HomePage()));
               }
             },
             child: BlocBuilder<LoginBloc, LoginState>(

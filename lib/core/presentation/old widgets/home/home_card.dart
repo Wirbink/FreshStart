@@ -28,18 +28,6 @@ class HomeCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => EstadoDeCuentaWidget(
-        //       spent: spent,
-        //       date: date,
-        //       bill: bill,
-        //       voucher: voucher,
-        //       cardNumber: cardNumber,
-        //     ),
-        //   ),
-        // );
       },
       child: Container(
         margin: const EdgeInsets.only(top: 10.0, bottom: 7.5),

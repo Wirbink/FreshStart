@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/views/Recharges/service__number.dart';
-import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
-import 'package:fresh_start/core/presentation/widgets/recharges/buildResponsiveButtonRow.dart';
-import 'package:fresh_start/core/presentation/widgets/recharges/buildRoundedButton.dart';
-import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/recharges/buildResponsiveButtonRow.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/recharges/buildRoundedButton.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/subtitle.dart';
 
 class RechargesView extends StatelessWidget {
   const RechargesView({Key? key}) : super(key: key);

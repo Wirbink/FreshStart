@@ -4,12 +4,12 @@ import 'package:fresh_start/core/presentation/bloc/Transfers/tansfers_contact_st
 import 'package:fresh_start/core/presentation/bloc/Transfers/transfers_contact_event.dart';
 import 'package:fresh_start/core/presentation/bloc/Transfers/trasnfers_contact_bloc.dart';
 import 'package:fresh_start/core/presentation/views/estado_cuenta_view.dart';
-import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
-import 'package:fresh_start/core/presentation/widgets/rounded_button.dart';
-import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
-import 'package:fresh_start/core/presentation/widgets/dropdown_list_bank.dart';
-import 'package:fresh_start/core/presentation/widgets/transfers/contact_card.dart';
-import 'package:fresh_start/core/presentation/widgets/transfers/contact_card_international.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/rounded_button.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/subtitle.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/dropdown_list_bank.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/transfers/contact_card.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/transfers/contact_card_international.dart';
 import 'package:fresh_start/data/repositories/Transfers/contacts_repository_impl.dart';
 import 'package:fresh_start/domain/usecases/Transfers/contact_data.dart';
 

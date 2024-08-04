@@ -5,7 +5,7 @@ import 'package:fresh_start/core/presentation/views/Cash%20Express/cash_express_
 import 'package:fresh_start/core/presentation/views/Services%20Payment/services_payment_view.dart';
 import 'package:fresh_start/core/presentation/views/Transfers/National%20Transfers/transfers_view.dart';
 import 'package:fresh_start/core/presentation/views/estado_cuenta_view.dart';
-import 'package:fresh_start/core/presentation/widgets/home/service_icon_button.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/home/service_icon_button.dart';
 import 'package:fresh_start/styles.dart';
 
 class CardSection extends StatelessWidget {

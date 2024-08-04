@@ -4,9 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fresh_start/core/presentation/bloc/add_new_contact_bloc.dart';
 import 'package:fresh_start/core/presentation/bloc/add_new_contact_state.dart';
 import 'package:fresh_start/core/presentation/views/Transfers/add_new_contact.dart';
-import 'package:fresh_start/core/presentation/widgets/app_bar.dart';
-import 'package:fresh_start/core/presentation/widgets/general_button.dart';
-import 'package:fresh_start/core/presentation/widgets/subtitle.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
+import 'package:fresh_start/core/presentation/old%20widgets/subtitle.dart';
 import 'package:fresh_start/data/repositories/Transfers/trasnfers_repository_impl.dart';
 import 'package:fresh_start/domain/usecases/Transfers/transfers_data.dart';
 

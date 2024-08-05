@@ -16,6 +16,7 @@ import 'package:fresh_start/features/transferences/domain/usecases/transferences
 import 'package:fresh_start/features/user/data/models/user_model.dart';
 import 'package:fresh_start/features/user/data/repositories/user_repository_impl.dart';
 import 'package:fresh_start/features/user/domain/usecases/user_usecase.dart';
+import 'package:fresh_start/shared/presentation/section/loading_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -51,7 +52,7 @@ class HomePage extends StatelessWidget {
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             if (state is HomeLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const LoadingPage();
             } else if (state is HomeSuccess) {
               return buildHomePage(
                   context, state.user, state.account, state.transferences);

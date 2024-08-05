@@ -1,14 +1,95 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
-import 'package:fresh_start/styles.dart';
+import 'package:fresh_start/core/presentation/widgets/custom_button.dart';
+import 'package:fresh_start/core/presentation/widgets/custom_text_form_field.dart';
+import 'package:fresh_start/core/utils/snackbar_utils.dart';
+import 'package:fresh_start/core/utils/string_utils.dart';
+import 'package:fresh_start/core/utils/validators.dart';
+import 'package:fresh_start/features/home/presentation/pages/home_page.dart';
+import 'package:fresh_start/features/user/data/models/user_model.dart';
+import 'package:fresh_start/features/user/data/models/user_update_model.dart';
+import 'package:fresh_start/features/user/data/repositories/user_repository_impl.dart';
+import 'package:fresh_start/features/user/domain/usecases/user_update_usecase.dart';
+import 'package:fresh_start/features/user/domain/usecases/user_usecase.dart';
+import 'package:fresh_start/features/user/presentation/blocs/user_update_bloc.dart';
+import 'package:fresh_start/shared/presentation/section/loading_page.dart';
+import 'package:fresh_start/shared/presentation/theme/colors.dart';
+import 'package:fresh_start/shared/presentation/theme/icons.dart';
+import 'package:fresh_start/shared/presentation/theme/text_styles.dart';
+import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 
-class UpdateUserPage extends StatelessWidget {
-  const UpdateUserPage({super.key});
+class UserUpdatePage extends StatefulWidget {
+  const UserUpdatePage({super.key});
+
+  @override
+  _UserUpdatePageState createState() => _UserUpdatePageState();
+}
+
+class _UserUpdatePageState extends State<UserUpdatePage> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController rfcController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController idBankController = TextEditingController();
+
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    //String initials = getInitials(username);
+    final connectivity = Connectivity();
+
+    final userRepository = UserRepositoryImpl(connectivity: connectivity);
+    final userUseCase = UserUseCase(userRepository);
+    final userUpdateUseCase = UserUpdateUseCase(userRepository);
+    final userBloc = UserUpdateBloc(
+        userUseCase: userUseCase, userUpdateUseCase: userUpdateUseCase)
+      ..add(GetDataEvent());
+
+    return BlocProvider(
+      create: (context) => userBloc,
+      child: BlocListener<UserUpdateBloc, UserUpdateState>(
+        listener: (context, state) {
+          if (state is UserUpdateErrorSubmited) {
+            showCustomSnackBar(context, state.message, false);
+          } else if (state is UserUpdateSuccess) {
+            BlocProvider.of<UserUpdateBloc>(context).add(GetDataEvent());
+            Future.delayed(const Duration(seconds: 1), () {
+              showCustomSnackBar(context, 'Actualizado con éxito.', true);
+            });
+          }
+        },
+        child: BlocBuilder<UserUpdateBloc, UserUpdateState>(
+          builder: (context, state) {
+            if (state is UserUpdateLoading) {
+              return const LoadingPage();
+            } else if (state is UserUpdateErrorLoaded) {
+              //Aqui debe ir una vista generica para recargar la página volver a cargar los datos
+              return Text('Entre al Error');
+            } else if (state is UserUpdateLoaded) {
+              return buildUserUpdatePage(context, state.user, state);
+            } else {
+              return Container();
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget buildUserUpdatePage(
+      BuildContext context, UserModel userData, UserUpdateState state) {
+    nameController.text = userData.name;
+    lastnameController.text = userData.lastname;
+    emailController.text = userData.email;
+    phoneController.text = userData.phone;
+    rfcController.text = userData.rfc;
+
     return Scaffold(
       appBar: const AppBarWidget(titleAppBar: "Editar perfil"),
       body: Center(
@@ -16,98 +97,87 @@ class UpdateUserPage extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 60.0,
-                backgroundColor: colorSecondaryComplementary,
+                backgroundColor: AppColors.colorSecondaryComplementary,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    /* TextRobotoBold(
-                    text: initials,
-                    color: Colors.white,
-                    size: 40,
-                  ), */
+                    Text(
+                      getInitials(userData.name, userData.lastname),
+                      style: AppTextStyles.display1
+                          .copyWith(fontSize: 60, color: Colors.white),
+                    )
                   ],
                 ),
               ),
               const SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Brayn',
-                  prefixIcon: Icon(Icons.person),
-                ),
+              Form(
+                  key: _key,
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
+                        controller: nameController,
+                        label: 'Nombre(s)',
+                        icon: AppIcons.person,
+                        validator: Validators.validateName,
+                      ),
+                      const SizedBox(height: 14.0),
+                      CustomTextFormField(
+                        controller: lastnameController,
+                        label: 'Apellidos',
+                        icon: AppIcons.person,
+                        validator: Validators.validateLastName,
+                      ),
+                      const SizedBox(height: 14.0),
+                      CustomTextFormField(
+                        controller: emailController,
+                        label: 'Email',
+                        icon: AppIcons.email,
+                        validator: Validators.validateEmail,
+                      ),
+                      const SizedBox(height: 14.0),
+                      CustomTextFormField(
+                        controller: phoneController,
+                        label: 'Teléfono',
+                        icon: AppIcons.phone,
+                        validator: Validators.phoneNumber,
+                      ),
+                      const SizedBox(height: 14.0),
+                      CustomTextFormField(
+                        controller: rfcController,
+                        label: 'RFC',
+                        icon: AppIcons.rfc,
+                        validator: Validators.validateRFC,
+                      ),
+                    ],
+                  )),
+              Expanded(
+                child: Container(),
               ),
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Sahagun',
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'braynsahagun@gmail.com',
-                  prefixIcon: Icon(Icons.email),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: '9983983716',
-                  prefixIcon: Icon(Icons.phone),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'AYBQ161028018',
-                  prefixIcon: Icon(Icons.phone),
-                ),
-              ),
-              const SizedBox(height: 24.0),
-              Center(
-                child: GestureDetector(
-                  child: GeneralButtonWidget(
-                    text: "Actualizar",
-                    onPressed: () {
-                      /* final user = RegisterModel(
-                                    name: nameController.text,
-                                    lastname: lastnameController.text,
-                                    email: emailController.text,
-                                    rfc: rfcController.text,
-                                    phone: phoneController.text,
-                                    password: passwordController.text,
-                                    id_bank: 6,
-                                  );
-                                  BlocProvider.of<RegisterBloc>(context)
-                                      .add(SubmitRegisterEvent(register: user)); */
-                    },
-                    /* isLoading: state is RegisterLoading, */
-                  ),
-                ),
-              ),
+              CustomButton(
+                label: "Actualizar",
+                isLoading: state is UserUpdateLoading,
+                isEnabled: true,
+                onPressed: () {
+                  if (_key.currentState!.validate()) {
+                    final update = UserUpdateModel(
+                        name: nameController.text,
+                        lastname: lastnameController.text,
+                        email: emailController.text,
+                        rfc: rfcController.text,
+                        phone: phoneController.text,
+                        id_bank: 7);
+                    BlocProvider.of<UserUpdateBloc>(context)
+                        .add(SubmittedDataEvent(update: update));
+                  }
+                },
+              )
             ],
           ),
         ),
       ),
     );
-  }
-
-  String getInitials(String name) {
-    List<String> names = name.split(' ');
-    String initials = '';
-    for (var part in names) {
-      if (part.isNotEmpty) {
-        initials += part[0];
-      }
-    }
-    return initials.toUpperCase();
   }
 }

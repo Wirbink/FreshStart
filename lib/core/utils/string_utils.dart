@@ -33,3 +33,7 @@ String doubleToIntegerMoney(double value) {
 
   return '$formattedIntegerPart.$decimalPart';
 }
+
+String getInitials(String name, String lastName) {
+  return '${name[0]}${lastName[0]}';
+}

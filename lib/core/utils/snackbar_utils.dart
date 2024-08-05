@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_start/shared/presentation/theme/colors.dart';
+import 'package:fresh_start/shared/presentation/theme/icons.dart';
 
-void showCustomSnackBar(BuildContext context, String message) {
+void showCustomSnackBar(BuildContext context, String message, bool isSuccess) {
   final snackBar = SnackBar(
     content: Row(
       children: [
-        const Icon(Icons.error, color: Colors.white),
+        Icon(isSuccess ? AppIcons.checkRounded : AppIcons.errorAlert,
+            color: Colors.white),
         const SizedBox(width: 10),
         Text(message),
       ],
     ),
-    backgroundColor: const Color(0xFFc33c3b),
+    backgroundColor: isSuccess
+        ? AppColors.colorSecondaryComplementary
+        : AppColors.errorColor,
     // behavior: SnackBarBehavior.floating,
     behavior: SnackBarBehavior.floating,
     shape: RoundedRectangleBorder(

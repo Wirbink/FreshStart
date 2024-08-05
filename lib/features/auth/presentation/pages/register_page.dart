@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/divider_widget.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
+import 'package:fresh_start/core/presentation/widgets/custom_text_form_field.dart';
 import 'package:fresh_start/core/services/shared_preferences_service.dart';
 import 'package:fresh_start/core/utils/snackbar_utils.dart';
 import 'package:fresh_start/core/utils/string_utils.dart';
@@ -13,6 +14,7 @@ import 'package:fresh_start/features/auth/domain/usecases/register_usecase.dart'
 import 'package:fresh_start/features/auth/presentation/blocs/register_bloc/register_bloc.dart';
 import 'package:fresh_start/features/auth/presentation/pages/login_page.dart';
 import 'package:fresh_start/features/auth/presentation/widgets/password_field.dart';
+import 'package:fresh_start/shared/presentation/theme/icons.dart';
 import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 import 'package:fresh_start/styles.dart';
 
@@ -51,7 +53,8 @@ class _RegisterPageState extends State<RegisterPage> {
         child: BlocListener<RegisterBloc, RegisterState>(
           listener: (context, state) {
             if (state is RegisterError) {
-              showCustomSnackBar(context, capitalizeFirstLetter(state.message));
+              showCustomSnackBar(
+                  context, capitalizeFirstLetter(state.message), false);
             } else if (state is RegisterSuccess) {
               navigateToReplacement(context, const LoginPage());
             }
@@ -100,33 +103,24 @@ class _RegisterPageState extends State<RegisterPage> {
                                 fontSize: 30.0),
                           ),
                           const SizedBox(height: 24.0),
-                          TextFormField(
+                          CustomTextFormField(
                             controller: nameController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Nombre(s)',
-                              suffixIcon: Icon(Icons.person),
-                            ),
+                            label: 'Nombre(s)',
+                            icon: AppIcons.person,
                             validator: Validators.validateName,
                           ),
                           const SizedBox(height: 14.0),
-                          TextFormField(
+                          CustomTextFormField(
                             controller: lastnameController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Apellidos',
-                              suffixIcon: Icon(Icons.person),
-                            ),
+                            label: 'Apellidos',
+                            icon: AppIcons.person,
                             validator: Validators.validateLastName,
                           ),
                           const SizedBox(height: 14.0),
-                          TextFormField(
+                          CustomTextFormField(
                             controller: emailController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Email',
-                              suffixIcon: Icon(Icons.email),
-                            ),
+                            label: 'Email',
+                            icon: AppIcons.email,
                             validator: Validators.validateEmail,
                           ),
                           const SizedBox(height: 14.0),
@@ -135,22 +129,17 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: passwordController,
                           ),
                           const SizedBox(height: 14.0),
-                          TextFormField(
+                          CustomTextFormField(
                             controller: phoneController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Teléfono',
-                              suffixIcon: Icon(Icons.phone),
-                            ),
+                            label: 'Teléfono',
+                            icon: AppIcons.phone,
                             validator: Validators.phoneNumber,
                           ),
                           const SizedBox(height: 14.0),
-                          TextFormField(
+                          CustomTextFormField(
                             controller: rfcController,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'RFC',
-                                suffixIcon: Icon(Icons.phone)),
+                            label: 'RFC',
+                            icon: AppIcons.rfc,
                             validator: Validators.validateRFC,
                           ),
                           const SizedBox(height: 24.0),
@@ -167,17 +156,19 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: GeneralButtonWidget(
                                 text: "Registrarse",
                                 onPressed: () {
-                                  final user = RegisterModel(
-                                    name: nameController.text,
-                                    lastname: lastnameController.text,
-                                    email: emailController.text,
-                                    rfc: rfcController.text,
-                                    phone: phoneController.text,
-                                    password: passwordController.text,
-                                    id_bank: 6,
-                                  );
-                                  BlocProvider.of<RegisterBloc>(context)
-                                      .add(SubmitRegisterEvent(register: user));
+                                  if (_key.currentState!.validate()) {
+                                    final user = RegisterModel(
+                                      name: nameController.text,
+                                      lastname: lastnameController.text,
+                                      email: emailController.text,
+                                      rfc: rfcController.text,
+                                      phone: phoneController.text,
+                                      password: passwordController.text,
+                                      id_bank: 6,
+                                    );
+                                    BlocProvider.of<RegisterBloc>(context).add(
+                                        SubmitRegisterEvent(register: user));
+                                  }
                                 },
                                 isLoading: state is RegisterLoading,
                               ),

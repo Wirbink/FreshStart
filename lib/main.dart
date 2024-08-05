@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/features/auth/presentation/pages/login_page.dart';
+import 'package:fresh_start/shared/presentation/theme/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'FreshBank',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: AppColors.colorPrimaryComplementary),
           useMaterial3: true,
-          scaffoldBackgroundColor: const Color(0XFFF0F2F5)),
+          scaffoldBackgroundColor: const Color(0XFFF0F2F5),
+          fontFamily: 'MarkPro'),
       home: const LoginPage(),
     );
   }

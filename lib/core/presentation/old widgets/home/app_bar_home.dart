@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_start/features/user/presentation/pages/user_update_page.dart';
+import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 import 'package:fresh_start/styles.dart';
 
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
@@ -17,21 +19,26 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: colorBackground,
       title: Row(
         children: [
-          Container(
-            padding: const EdgeInsets.only(left: 20.0),
-            child: CircleAvatar(
-              radius: 35.0,
-              backgroundColor: colorSecondaryComplementary,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextRobotoBold(
-                    text: initials,
-                    color: Colors.white,
-                    size: 25,
-                  ),
-                ],
+          GestureDetector(
+            onTap: () {
+              navigateTo(context, const UserUpdatePage());
+            },
+            child: Container(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: CircleAvatar(
+                radius: 35.0,
+                backgroundColor: colorSecondaryComplementary,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextRobotoBold(
+                      text: initials,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

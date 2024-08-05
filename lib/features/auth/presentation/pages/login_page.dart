@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
             listener: (context, state) {
               if (state is LoginError) {
                 showCustomSnackBar(
-                    context, capitalizeFirstLetter(state.message));
+                    context, capitalizeFirstLetter(state.message), false);
               } else if (state is LoginSuccess) {
                 Navigator.pushReplacement(
                     context,
@@ -122,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 20.0),
                         PasswordField(
-                          validator: Validators.validatePassword,
                           controller: passwordController,
                         ),
                         const SizedBox(height: 30.0),

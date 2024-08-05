@@ -21,7 +21,7 @@ class UserUpdateBloc extends Bloc<UserUpdateEvent, UserUpdateState> {
       failureOrSuccess.fold(
           (userFailure) =>
               emit(UserUpdateErrorLoaded(message: userFailure.message)),
-          (user) => UserUpdateLoaded(user: user));
+          (user) => emit(UserUpdateLoaded(user: user)));
     });
     on<SubmittedDataEvent>((event, emit) async {
       emit(UserUpdateLoading());
@@ -29,7 +29,7 @@ class UserUpdateBloc extends Bloc<UserUpdateEvent, UserUpdateState> {
           await userUpdateUseCase(UserUpdateParams(user: event.update));
       failureOrSuccess.fold(
           (failure) => emit(UserUpdateErrorSubmited(message: failure.message)),
-          (_) => UserUpdateSuccess());
+          (_) => emit(UserUpdateSuccess()));
     });
   }
 }

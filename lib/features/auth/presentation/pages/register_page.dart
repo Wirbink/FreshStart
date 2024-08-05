@@ -99,14 +99,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                 fontSize: 30.0),
                           ),
                           const SizedBox(height: 24.0),
-                          // InputText(
-                          //   placeholder: "Nombre",
-                          //   iconPlaceholder: const Icon(
-                          //     Icons.person,
-                          //     color: colorBorder,
-                          //   ),
-                          //   controller: nameController,
-                          // ),
                           TextFormField(
                             controller: nameController,
                             decoration: const InputDecoration(
@@ -143,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           const SizedBox(height: 14.0),
                           TextFormField(
-                            controller: passwordController,
+                            controller: phoneController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Teléfono',

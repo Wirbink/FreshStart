@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fresh_start/features/home/presentation/blocs/home_bloc.dart';
 import 'package:fresh_start/features/user/presentation/pages/user_update_page.dart';
 import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 import 'package:fresh_start/styles.dart';
@@ -21,7 +23,15 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
         children: [
           GestureDetector(
             onTap: () {
-              navigateTo(context, const UserUpdatePage());
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserUpdatePage()),
+              ).then((result) {
+                if (result == true) {
+                  // Volver a disparar el evento para recargar los datos
+                  BlocProvider.of<HomeBloc>(context).add(GetDataEvent());
+                }
+              });
             },
             child: Container(
               padding: const EdgeInsets.only(left: 20.0),

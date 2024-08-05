@@ -91,7 +91,12 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
     rfcController.text = userData.rfc;
 
     return Scaffold(
-      appBar: const AppBarWidget(titleAppBar: "Editar perfil"),
+      appBar: AppBarWidget(
+        titleAppBar: "Editar perfil",
+        onBackButtonPressed: () {
+          Navigator.pop(context, true);
+        },
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

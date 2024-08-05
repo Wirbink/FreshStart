@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String titleAppBar;
+  final VoidCallback? onBackButtonPressed; // Callback opcional
 
-  const AppBarWidget({super.key, required this.titleAppBar});
+  const AppBarWidget({
+    super.key,
+    required this.titleAppBar,
+    this.onBackButtonPressed, // Inicializa el callback opcional
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: const Color(0xFFF0F2F5),
       leading: GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          if (onBackButtonPressed != null) {
+            onBackButtonPressed!(); // Ejecuta el callback si existe
+          } else {
+            Navigator.pop(context); // Comportamiento por defecto
+          }
         },
         child: const Icon(
           Icons.arrow_back_ios,

@@ -13,7 +13,6 @@ import 'package:fresh_start/features/auth/domain/usecases/register_usecase.dart'
 import 'package:fresh_start/features/auth/presentation/blocs/register_bloc/register_bloc.dart';
 import 'package:fresh_start/features/auth/presentation/pages/login_page.dart';
 import 'package:fresh_start/features/auth/presentation/widgets/password_field.dart';
-import 'package:fresh_start/features/home/presentation/pages/home_page.dart';
 import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 import 'package:fresh_start/styles.dart';
 
@@ -54,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
             if (state is RegisterError) {
               showCustomSnackBar(context, capitalizeFirstLetter(state.message));
             } else if (state is RegisterSuccess) {
-              navigateToReplacement(context, const HomePage());
+              navigateToReplacement(context, const LoginPage());
             }
           },
           child: BlocBuilder<RegisterBloc, RegisterState>(

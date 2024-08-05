@@ -12,4 +12,5 @@ class AppIcons {
   static const IconData statementAccount = Icons.description;
   static const IconData recharges = Icons.phone_android;
   static const IconData qr = Icons.qr_code;
+  static const IconData phone = Icons.phone;
 }

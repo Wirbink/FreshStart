@@ -4,7 +4,6 @@ import 'package:fresh_start/core/usecases/usecase.dart';
 import 'package:fresh_start/features/statement_account/data/models/account_model.dart';
 import 'package:fresh_start/features/statement_account/domain/usecases/account_usecase.dart';
 import 'package:fresh_start/features/transferences/data/model/transference_model.dart';
-import 'package:fresh_start/features/transferences/data/model/transference_specific_model.dart';
 import 'package:fresh_start/features/transferences/domain/usecases/transferences_usecase.dart';
 import 'package:fresh_start/features/user/data/models/user_model.dart';
 import 'package:fresh_start/features/user/domain/usecases/user_usecase.dart';

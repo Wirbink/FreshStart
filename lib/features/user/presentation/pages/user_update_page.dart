@@ -3,19 +3,9 @@ import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
 import 'package:fresh_start/styles.dart';
 
-class UpdateUserPage extends StatefulWidget {
-  //final String username;
+class UpdateUserPage extends StatelessWidget {
+  const UpdateUserPage({super.key});
 
-  const UpdateUserPage({
-    super.key,
-    /* required this.username */
-  });
-
-  @override
-  _UpdateUserPageState createState() => _UpdateUserPageState();
-}
-
-class _UpdateUserPageState extends State<UpdateUserPage> {
   @override
   Widget build(BuildContext context) {
     //String initials = getInitials(username);

@@ -45,7 +45,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
                     TextRobotoBold(
                       text: initials,
                       color: Colors.white,
-                      size: 25,
+                      size: 30,
                     ),
                   ],
                 ),

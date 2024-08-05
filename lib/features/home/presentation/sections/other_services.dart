@@ -46,7 +46,7 @@ class OtherServices extends StatelessWidget {
                           //TODO: Hacer vista de Transferencia Internacional
                           onPressed: () => navigateTo(context, Container())),
                       ServiceButton(
-                          label: 'Recarga Celualr',
+                          label: 'Recarga Celular',
                           icon: AppIcons.recharges,
                           bgColor: AppColors.colorPrimaryComplementary,
                           iconColor: Colors.white,

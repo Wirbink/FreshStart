@@ -39,7 +39,7 @@ class ServiceButton extends StatelessWidget {
       ),
       ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: 80.0,
+          maxWidth: 79.6,
         ),
         child: Text(
           label,

@@ -127,7 +127,11 @@ class _BalanceCardState extends State<BalanceCard> {
                           iconColor: AppColors.colorPrimaryComplementary,
                           fgColor: Colors.white,
                           //TODO: Hacer vista de Transferencias
-                          onPressed: () => navigateTo(context, ContactsPage())),
+                          onPressed: () => navigateTo(
+                              context,
+                              ContactsPage(
+                                userAccount: widget.userAccount,
+                              ))),
                       ServiceButton(
                           label: 'Retiro sin Tarjeta',
                           icon: AppIcons.withdrawal,

@@ -8,14 +8,17 @@ class CustomTextFormField extends StatelessWidget {
   final IconData icon;
   final String? Function(String?)? validator;
   final TextInputType? inputType;
+  final bool enabled;
 
-  const CustomTextFormField(
-      {super.key,
-      required this.controller,
-      required this.label,
-      required this.icon,
-      this.validator,
-      this.inputType = TextInputType.text});
+  const CustomTextFormField({
+    super.key,
+    required this.controller,
+    required this.label,
+    required this.icon,
+    this.validator,
+    this.inputType = TextInputType.text,
+    this.enabled = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       validator: validator,
       keyboardType: inputType,
+      enabled: enabled,
     );
   }
 }

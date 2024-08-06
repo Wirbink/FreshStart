@@ -3,17 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
 import 'package:fresh_start/core/utils/snackbar_utils.dart';
+import 'package:fresh_start/core/utils/string_utils.dart';
 import 'package:fresh_start/features/contacts/data/model/contact_model.dart';
 import 'package:fresh_start/features/contacts/data/repositories/contact_repository_impl.dart';
 import 'package:fresh_start/features/contacts/domain/usecase/contact_usecase.dart';
 import 'package:fresh_start/features/contacts/presentation/bloc/list_contacts/list_contact_bloc.dart';
+import 'package:fresh_start/features/contacts/presentation/pages/create_contact_page.dart';
+import 'package:fresh_start/features/transferences/presentation/pages/send_transferences_page.dart';
 import 'package:fresh_start/shared/presentation/section/loading_page.dart';
 import 'package:fresh_start/shared/presentation/theme/colors.dart';
 import 'package:fresh_start/shared/presentation/theme/icons.dart';
 import 'package:fresh_start/shared/presentation/theme/spacing.dart';
 import 'package:fresh_start/shared/presentation/theme/text_styles.dart';
+import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 
 class ContactsPage extends StatelessWidget {
+  final String userAccount;
+
+  const ContactsPage({super.key, required this.userAccount});
+
+
   @override
   Widget build(BuildContext context) {
     final connectivity = Connectivity();
@@ -35,7 +44,7 @@ class ContactsPage extends StatelessWidget {
         child: BlocBuilder<ListContactBloc, ListContactState>(
           builder: (context, state) {
             if (state is ListContactLoading) {
-              return LoadingPage();
+              return const LoadingPage();
             } else if (state is ListContactSuccess) {
               return buildContactList(context, state.contact);
             } else {
@@ -49,7 +58,7 @@ class ContactsPage extends StatelessWidget {
 
   Widget buildContactList(BuildContext context, List<ContactModel> contact) {
   return Scaffold(
-    appBar: AppBarWidget(titleAppBar: 'Contactos'),
+    appBar: const AppBarWidget(titleAppBar: 'Contactos'),
     body: ListView.builder(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.medium),
       itemCount: contact.length,
@@ -64,12 +73,12 @@ class ContactsPage extends StatelessWidget {
             ),
             elevation: 0,
             child: ListTile(
-              contentPadding: const EdgeInsets.all(AppSpacing.medium),
+              contentPadding: const EdgeInsets.all(AppSpacing.small),
               leading: CircleAvatar(
-                backgroundColor: AppColors.colorDisabled,
+                backgroundColor: AppColors.colorSecondary,
                 child: Text(
                   contactItem.nickname.substring(0, 2).toUpperCase(),
-                  style: AppTextStyles.heading2,
+                  style: AppTextStyles.display1.copyWith(color: Colors.white, fontSize: 20),
                 ),
               ),
               title: Text(
@@ -93,12 +102,12 @@ class ContactsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Icons.arrow_forward_ios,
                 color: AppColors.colorSecondaryText,
               ),
               onTap: () {
-                // Aquí puedes agregar la acción cuando se toca el contacto.
+                navigateTo(context, SendTransferencesPage(userAccount: userAccount, receptorCard: contactItem.account));
               },
             ),
           ),
@@ -107,18 +116,11 @@ class ContactsPage extends StatelessWidget {
     ),
     floatingActionButton: FloatingActionButton(
       onPressed: () {
-        // Aquí puedes agregar la acción del FAB.
+        navigateTo(context, CreateContactPage());
       },
-      child: Icon(AppIcons.addCircleOutline),
+      child: const Icon(AppIcons.addCircleOutline),
     ),
   );
-}
-
-String getMaskedAccount(String account) {
-  if (account.length > 4) {
-    return account.substring(0, 4) + " **" + account.substring(account.length - 4);
-  }
-  return account;
 }
 
 }

@@ -42,3 +42,10 @@ String getLastFourDigits(String value) {
   String lastFour = value.substring(value.length - 4);
   return '• $lastFour';
 }
+
+String getMaskedAccount(String account) {
+  if (account.length > 4) {
+    return "${account.substring(0, 4)} **${account.substring(account.length - 4)}";
+  }
+  return account;
+}

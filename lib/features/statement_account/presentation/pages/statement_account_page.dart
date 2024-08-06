@@ -122,9 +122,11 @@ class StatementAccountPage extends StatelessWidget {
             ),
             const Text('Mi movimientos', style: AppTextStyles.heading1),
             transferences.isEmpty
-                ? const EmptyData(
-                    message: 'No hay movimientos',
-                    tip: '¡Realiza tu primer operación!')
+                ? Center(
+                    child: const EmptyData(
+                        message: 'No hay movimientos',
+                        tip: '¡Realiza tu primer operación!'),
+                  )
                 : ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),

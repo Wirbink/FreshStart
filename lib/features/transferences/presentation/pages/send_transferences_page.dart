@@ -16,8 +16,10 @@ import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 
 class SendTransferencesPage extends StatefulWidget {
   final String userAccount;
+  final String receptorCard;
 
-  const SendTransferencesPage({super.key, required this.userAccount});
+  const SendTransferencesPage(
+      {super.key, required this.userAccount, required this.receptorCard});
 
   @override
   _SendTransferencesPageState createState() => _SendTransferencesPageState();
@@ -69,6 +71,7 @@ class _SendTransferencesPageState extends State<SendTransferencesPage> {
   }
 
   Widget buildSendTransfer(BuildContext context) {
+    receptorAccountController.text = widget.receptorCard;
     return Scaffold(
       appBar: const AppBarWidget(titleAppBar: 'Transacciones'),
       body: SingleChildScrollView(
@@ -84,6 +87,7 @@ class _SendTransferencesPageState extends State<SendTransferencesPage> {
                     controller: receptorAccountController,
                     label: 'Tarjeta destino',
                     icon: Icons.credit_card,
+                    enabled: false,
                   ),
                   const SizedBox(height: 12.0),
                   CustomTextFormField(

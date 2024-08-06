@@ -25,9 +25,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       leading: GestureDetector(
         onTap: () {
           if (onBackButtonPressed != null) {
-            onBackButtonPressed!(); // Ejecuta el callback si existe
+            onBackButtonPressed!();
           } else {
-            Navigator.pop(context); // Comportamiento por defecto
+            Navigator.pop(context);
           }
         },
         child: const Icon(

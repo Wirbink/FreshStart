@@ -10,7 +10,9 @@ import 'package:fresh_start/features/contacts/data/model/create_contact_model.da
 import 'package:fresh_start/features/contacts/data/repositories/contact_repository_impl.dart';
 import 'package:fresh_start/features/contacts/domain/usecase/create_contact_usecase.dart';
 import 'package:fresh_start/features/contacts/presentation/bloc/create_contact/contact_bloc.dart';
+import 'package:fresh_start/features/home/presentation/pages/home_page.dart';
 import 'package:fresh_start/shared/presentation/section/loading_page.dart';
+import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 
 class CreateContactPage extends StatelessWidget {
   final TextEditingController nicknameController = TextEditingController();
@@ -35,6 +37,7 @@ class CreateContactPage extends StatelessWidget {
         listener: (context, state) {
           if (state is ContactSuccess) {
             showCustomSnackBar(context, 'Contacto creado con éxito.', true);
+            Navigator.pop(context, true);
           } else if (state is ContactError) {
             showCustomSnackBar(context, state.message, false);
             BlocProvider.of<ContactBloc>(context).add(ReloadEvent());

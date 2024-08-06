@@ -18,6 +18,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
     String initials = getInitials(username);
 
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: colorBackground,
       title: Row(
         children: [

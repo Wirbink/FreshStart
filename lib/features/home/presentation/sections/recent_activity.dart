@@ -31,11 +31,11 @@ class RecentActivity extends StatelessWidget {
                   style: AppTextStyles.heading1,
                 ),
                 const Spacer(),
-                Hyperlink(
+                activities.isNotEmpty ? Hyperlink(
                     isEnabled: activities.isNotEmpty,
                     onPressed: () =>
                         navigateTo(context, StatementAccountPage()),
-                    label: 'Ver todos'),
+                    label: 'Ver todos') : Container()
               ],
             ),
             activities.isEmpty

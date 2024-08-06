@@ -86,7 +86,7 @@ class StatementAccountPage extends StatelessWidget {
                             fontFamily: 'Roboto'),
                       ),
                       Text(
-                        getLastFourDigits(account.card[0].card),
+                        account.card[0].card,
                         style: AppTextStyles.paragraph1
                             .copyWith(color: AppColors.colorSecondaryText),
                       )

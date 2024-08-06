@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fresh_start/core/presentation/views/Cash%20Express/cash_express_view.dart';
+import 'package:fresh_start/core/presentation/views/Services%20Payment/services_payment_view.dart';
 import 'package:fresh_start/features/contacts/presentation/pages/contacts_page.dart';
 import 'package:fresh_start/features/home/presentation/widgets/service_button.dart';
 import 'package:fresh_start/features/statement_account/presentation/pages/statement_account_page.dart';
@@ -126,7 +128,6 @@ class _BalanceCardState extends State<BalanceCard> {
                           bgColor: Colors.white,
                           iconColor: AppColors.colorPrimaryComplementary,
                           fgColor: Colors.white,
-                          //TODO: Hacer vista de Transferencias
                           onPressed: () => navigateTo(
                               context,
                               ContactsPage(
@@ -138,23 +139,20 @@ class _BalanceCardState extends State<BalanceCard> {
                           bgColor: Colors.white,
                           iconColor: AppColors.colorPrimaryComplementary,
                           fgColor: Colors.white,
-                          // TODO: Hacer vista de Retiro
-                          onPressed: () => navigateTo(context, Container())),
+                          onPressed: () => navigateTo(context, const CashExpressView())),
                       ServiceButton(
                           label: 'Pago de Servicio',
                           icon: AppIcons.servicePayment,
                           bgColor: Colors.white,
                           iconColor: AppColors.colorPrimaryComplementary,
                           fgColor: Colors.white,
-                          // TODO: Hacer vista de Pago de servicios
-                          onPressed: () => navigateTo(context, Container())),
+                          onPressed: () => navigateTo(context, const ServicePaymentView())),
                       ServiceButton(
                           label: 'Estado de Cuenta',
                           icon: AppIcons.statementAccount,
                           bgColor: Colors.white,
                           iconColor: AppColors.colorPrimaryComplementary,
                           fgColor: Colors.white,
-                          //TODO: Hacer vista de Estado de cuenta
                           onPressed: () =>
                               navigateTo(context, StatementAccountPage()))
                     ],

@@ -1,7 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fresh_start/core/presentation/bloc/StatementAccount/specific_transfer_detail_state.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
 import 'package:fresh_start/core/presentation/widgets/custom_button.dart';
 import 'package:fresh_start/core/presentation/widgets/custom_text_form_field.dart';

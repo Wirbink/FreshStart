@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_start/core/presentation/views/Transfers/International%20Transfers/international_transfer.dart';
 import 'package:fresh_start/features/auth/presentation/pages/login_page.dart';
 import 'package:fresh_start/shared/presentation/theme/colors.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           scaffoldBackgroundColor: const Color(0XFFF0F2F5),
           fontFamily: 'MarkPro'),
-      home: const LoginPage(),
+      home: const InternationalTrasnfersView(),
     );
   }
 }

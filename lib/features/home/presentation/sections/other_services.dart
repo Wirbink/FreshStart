@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_start/core/presentation/views/CoDi/codi_register_view.dart';
+import 'package:fresh_start/core/presentation/views/Recharges/recharges_view.dart';
+import 'package:fresh_start/core/presentation/views/Transfers/International%20Transfers/international_transfer.dart';
 import 'package:fresh_start/features/home/presentation/widgets/service_button.dart';
 import 'package:fresh_start/shared/presentation/theme/colors.dart';
 import 'package:fresh_start/shared/presentation/theme/icons.dart';
@@ -44,7 +47,8 @@ class OtherServices extends StatelessWidget {
                           iconColor: Colors.white,
                           fgColor: AppColors.colorMainText,
                           //TODO: Hacer vista de Transferencia Internacional
-                          onPressed: () => navigateTo(context, Container())),
+                          onPressed: () => navigateTo(
+                              context, const InternationalTrasnfersView())),
                       ServiceButton(
                           label: 'Recarga Celular',
                           icon: AppIcons.recharges,
@@ -52,7 +56,8 @@ class OtherServices extends StatelessWidget {
                           iconColor: Colors.white,
                           fgColor: AppColors.colorMainText,
                           // TODO: Hacer vista de Recarga Celular
-                          onPressed: () => navigateTo(context, Container())),
+                          onPressed: () =>
+                              navigateTo(context, RechargesView())),
                       ServiceButton(
                           label: 'Operaciones QR',
                           icon: AppIcons.qr,
@@ -60,7 +65,8 @@ class OtherServices extends StatelessWidget {
                           iconColor: Colors.white,
                           fgColor: AppColors.colorMainText,
                           //TODO: Hacer vista de Operaciones QR
-                          onPressed: () => navigateTo(context, Container()))
+                          onPressed: () =>
+                              navigateTo(context, CodiRegisterView()))
                     ],
                   ),
                 )

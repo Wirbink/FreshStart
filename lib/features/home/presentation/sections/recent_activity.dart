@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_start/core/presentation/widgets/hyperlink.dart';
+import 'package:fresh_start/features/statement_account/presentation/pages/statement_account_page.dart';
 import 'package:fresh_start/features/transferences/data/model/transference_model.dart';
 import 'package:fresh_start/shared/presentation/section/empty_data.dart';
 import 'package:fresh_start/shared/presentation/theme/spacing.dart';
@@ -31,9 +32,9 @@ class RecentActivity extends StatelessWidget {
                 ),
                 const Spacer(),
                 Hyperlink(
-                    isEnabled: activities.isEmpty,
-                    //TODO: Hacer vista de Estado de Cuenta
-                    onPressed: () => navigateTo(context, Container()),
+                    isEnabled: activities.isNotEmpty,
+                    onPressed: () =>
+                        navigateTo(context, StatementAccountPage()),
                     label: 'Ver todos'),
               ],
             ),
@@ -44,7 +45,7 @@ class RecentActivity extends StatelessWidget {
                 : ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: activities.length,
+                    itemCount: activities.length > 5 ? 5 : activities.length,
                     itemBuilder: (context, index) {
                       return TransactionCard(transference: activities[index]);
                     },

@@ -6,16 +6,24 @@ void showCustomSnackBar(BuildContext context, String message, bool isSuccess) {
   final snackBar = SnackBar(
     content: Row(
       children: [
-        Icon(isSuccess ? AppIcons.checkRounded : AppIcons.errorAlert,
-            color: Colors.white),
+        Icon(
+          isSuccess ? AppIcons.checkRounded : AppIcons.errorAlert,
+          color: Colors.white,
+        ),
         const SizedBox(width: 10),
-        Text(message),
+        Expanded( // Usamos Expanded para que el texto ocupe el espacio disponible.
+          child: Text(
+            message,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis, // Limitar el desbordamiento con puntos suspensivos.
+            maxLines: 2, // Limitar a una línea.
+          ),
+        ),
       ],
     ),
     backgroundColor: isSuccess
         ? AppColors.colorSecondaryComplementary
         : AppColors.errorColor,
-    // behavior: SnackBarBehavior.floating,
     behavior: SnackBarBehavior.floating,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),

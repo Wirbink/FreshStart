@@ -1,27 +1,23 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/app_bar.dart';
-import 'package:fresh_start/core/presentation/old%20widgets/general_button.dart';
 import 'package:fresh_start/core/presentation/widgets/custom_button.dart';
 import 'package:fresh_start/core/presentation/widgets/custom_text_form_field.dart';
 import 'package:fresh_start/core/utils/snackbar_utils.dart';
 import 'package:fresh_start/core/utils/string_utils.dart';
 import 'package:fresh_start/core/utils/validators.dart';
-import 'package:fresh_start/features/home/presentation/pages/home_page.dart';
 import 'package:fresh_start/features/user/data/models/user_model.dart';
 import 'package:fresh_start/features/user/data/models/user_update_model.dart';
 import 'package:fresh_start/features/user/data/repositories/user_repository_impl.dart';
 import 'package:fresh_start/features/user/domain/usecases/user_update_usecase.dart';
 import 'package:fresh_start/features/user/domain/usecases/user_usecase.dart';
 import 'package:fresh_start/features/user/presentation/blocs/user_update_bloc.dart';
+import 'package:fresh_start/shared/presentation/section/error_page.dart';
 import 'package:fresh_start/shared/presentation/section/loading_page.dart';
 import 'package:fresh_start/shared/presentation/theme/colors.dart';
 import 'package:fresh_start/shared/presentation/theme/icons.dart';
 import 'package:fresh_start/shared/presentation/theme/text_styles.dart';
-import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 
 class UserUpdatePage extends StatefulWidget {
   const UserUpdatePage({super.key});
@@ -57,6 +53,7 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
         listener: (context, state) {
           if (state is UserUpdateErrorSubmited) {
             showCustomSnackBar(context, state.message, false);
+            BlocProvider.of<UserUpdateBloc>(context).add(GetDataEvent());
           } else if (state is UserUpdateSuccess) {
             BlocProvider.of<UserUpdateBloc>(context).add(GetDataEvent());
             Future.delayed(const Duration(seconds: 1), () {
@@ -69,8 +66,9 @@ class _UserUpdatePageState extends State<UserUpdatePage> {
             if (state is UserUpdateLoading) {
               return const LoadingPage();
             } else if (state is UserUpdateErrorLoaded) {
-              //Aqui debe ir una vista generica para recargar la página volver a cargar los datos
-              return Text('Entre al Error');
+              return ErrorPage<UserUpdateBloc, UserUpdateEvent>(
+                  bloc: BlocProvider.of<UserUpdateBloc>(context),
+                  event: GetDataEvent());
             } else if (state is UserUpdateLoaded) {
               return buildUserUpdatePage(context, state.user, state);
             } else {

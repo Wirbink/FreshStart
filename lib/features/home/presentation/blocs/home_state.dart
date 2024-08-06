@@ -20,7 +20,7 @@ class HomeSuccess extends HomeState {
       {required this.user, required this.account, required this.transferences});
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [user, account, transferences];
 }
 
 class HomeError extends HomeState {

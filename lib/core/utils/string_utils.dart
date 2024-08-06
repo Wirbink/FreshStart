@@ -37,3 +37,8 @@ String doubleToIntegerMoney(double value) {
 String getInitials(String name, String lastName) {
   return '${name[0]}${lastName[0]}';
 }
+
+String getLastFourDigits(String value) {
+  String lastFour = value.substring(value.length - 4);
+  return '• $lastFour';
+}

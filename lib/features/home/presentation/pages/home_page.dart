@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_start/core/presentation/old%20widgets/home/app_bar_home.dart';
+import 'package:fresh_start/core/utils/snackbar_utils.dart';
 import 'package:fresh_start/core/utils/string_utils.dart';
 import 'package:fresh_start/features/home/presentation/blocs/home_bloc.dart';
 import 'package:fresh_start/features/home/presentation/sections/balance_card.dart';
@@ -16,6 +17,7 @@ import 'package:fresh_start/features/transferences/domain/usecases/transferences
 import 'package:fresh_start/features/user/data/models/user_model.dart';
 import 'package:fresh_start/features/user/data/repositories/user_repository_impl.dart';
 import 'package:fresh_start/features/user/domain/usecases/user_usecase.dart';
+import 'package:fresh_start/shared/presentation/section/error_page.dart';
 import 'package:fresh_start/shared/presentation/section/loading_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -44,9 +46,7 @@ class HomePage extends StatelessWidget {
       child: BlocListener<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeError) {
-            // ScaffoldMessenger.of(context).showSnackBar(
-            //   SnackBar(content: Text('Error: ${state.message}')),
-            // );
+            showCustomSnackBar(context, state.message, false);
           }
         },
         child: BlocBuilder<HomeBloc, HomeState>(
@@ -57,11 +57,12 @@ class HomePage extends StatelessWidget {
               return buildHomePage(
                   context, state.user, state.account, state.transferences);
             } else if (state is HomeError) {
-              return Center(child: Text('Ocurrió un error: ${state.message}'));
-            } else {
-              return Container(
-                child: Text('data'),
+              return ErrorPage<HomeBloc, GetDataEvent>(
+                bloc: BlocProvider.of<HomeBloc>(context),
+                event: GetDataEvent(),
               );
+            } else {
+              return Container();
             }
           },
         ),
@@ -80,8 +81,10 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             BalanceCard(
-                integerPart: balanceResult['integerPart']!,
-                decimalPart: balanceResult['decimalPart']!),
+              integerPart: balanceResult['integerPart']!,
+              decimalPart: balanceResult['decimalPart']!,
+              userAccount: account.card[0].card_account,
+            ),
             const OtherServices(),
             RecentActivity(activities: activities)
           ],

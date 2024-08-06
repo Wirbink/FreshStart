@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fresh_start/features/contacts/presentation/pages/contacts_page.dart';
 import 'package:fresh_start/features/home/presentation/widgets/service_button.dart';
+import 'package:fresh_start/features/statement_account/presentation/pages/statement_account_page.dart';
+import 'package:fresh_start/features/transferences/presentation/pages/send_transferences_page.dart';
 import 'package:fresh_start/shared/presentation/theme/colors.dart';
 import 'package:fresh_start/shared/presentation/theme/icons.dart';
 import 'package:fresh_start/shared/presentation/theme/spacing.dart';
@@ -10,9 +13,13 @@ import 'package:fresh_start/shared/presentation/utils/navigation.dart';
 class BalanceCard extends StatefulWidget {
   final String integerPart;
   final String decimalPart;
+  final String userAccount;
 
   const BalanceCard(
-      {super.key, required this.integerPart, required this.decimalPart});
+      {super.key,
+      required this.integerPart,
+      required this.decimalPart,
+      required this.userAccount});
 
   @override
   _BalanceCardState createState() => _BalanceCardState();
@@ -61,8 +68,7 @@ class _BalanceCardState extends State<BalanceCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width:
-                                  100.0,
+                              width: 100.0,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -121,7 +127,7 @@ class _BalanceCardState extends State<BalanceCard> {
                           iconColor: AppColors.colorPrimaryComplementary,
                           fgColor: Colors.white,
                           //TODO: Hacer vista de Transferencias
-                          onPressed: () => navigateTo(context, Container())),
+                          onPressed: () => navigateTo(context, ContactsPage())),
                       ServiceButton(
                           label: 'Retiro sin Tarjeta',
                           icon: AppIcons.withdrawal,
@@ -145,7 +151,8 @@ class _BalanceCardState extends State<BalanceCard> {
                           iconColor: AppColors.colorPrimaryComplementary,
                           fgColor: Colors.white,
                           //TODO: Hacer vista de Estado de cuenta
-                          onPressed: () => navigateTo(context, Container()))
+                          onPressed: () =>
+                              navigateTo(context, StatementAccountPage()))
                     ],
                   ),
                 )

@@ -5,6 +5,7 @@ import 'package:fresh_start/core/error/failures.dart';
 import 'package:fresh_start/core/network/dio_client.dart';
 import 'package:fresh_start/core/network/network_info.dart';
 import 'package:fresh_start/core/network/network_info_impl.dart';
+import 'package:fresh_start/features/transferences/data/model/send_transferences_model.dart';
 import 'package:fresh_start/features/transferences/data/model/transference_model.dart';
 import 'package:fresh_start/features/transferences/data/model/transference_specific_model.dart';
 import 'package:fresh_start/features/transferences/domain/repositories/transference_repository.dart';
@@ -55,6 +56,32 @@ class TransferenceRepositoryImpl implements TransferenceRepository {
         if (response.statusCode == 200) {
           return Right(
               TransferenceSpecificModel.fromJson(response.data['data']));
+        } else if (response.statusCode == 401) {
+          return Left(UnauthorizedFailure(response.data['message']));
+        } else {
+          return Left(ServerFailure());
+        }
+      } on DioException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ConnectivityFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendTransference(
+      SendTransferencesModel transference) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final dio = await DioClient.getInstance();
+        final response =
+            await dio.post('/transferences', data: transference.toJson());
+
+        print(response);
+
+        if (response.statusCode == 201) {
+          return const Right(null);
         } else if (response.statusCode == 401) {
           return Left(UnauthorizedFailure(response.data['message']));
         } else {

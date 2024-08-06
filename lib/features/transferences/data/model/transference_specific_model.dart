@@ -22,7 +22,7 @@ class TransferenceSpecificModel extends TransferenceSpecificEntity {
             id_sender: id_sender,
             owner: owner,
             receptor_account: receptor_account,
-            sender_account: receptor_account);
+            sender_account: sender_account);
 
   factory TransferenceSpecificModel.fromJson(Map<String, dynamic> json) => _$TransferenceSpecificModelFromJson(json);
   Map<String, dynamic> toJson() => _$TransferenceSpecificModelToJson(this);
